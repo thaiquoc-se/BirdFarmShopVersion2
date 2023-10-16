@@ -17,6 +17,7 @@ namespace BusinessObjects.Models
         public string RoleId { get; set; } = null!;
         public string? WardId { get; set; }
         public string? DistrictId { get; set; }
+        public string? image {  get; set; }
 
         [Required(ErrorMessage ="Please Input your User Name")]
         public string? UserName { get; set; }

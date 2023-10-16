@@ -1,11 +1,18 @@
 using BusinessObjects.Models;
 using Microsoft.EntityFrameworkCore;
+using Repositories.IRepository;
+using Repositories.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddRazorPages().AddRazorPagesOptions(options => { options.Conventions.AddPageRoute("/Login", ""); });
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+});
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddRazorPages().AddRazorPagesOptions(options => { options.Conventions.AddPageRoute("/HomePage", ""); });
 builder.Services.AddDbContext<BirdFarmShopContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BirdFarmShop") ?? throw new InvalidOperationException("Connection string 'BirdFarmShop' not found.")));
 
@@ -20,6 +27,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseSession();
 app.UseStaticFiles();
 
 app.UseRouting();

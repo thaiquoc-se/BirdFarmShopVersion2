@@ -208,7 +208,7 @@ namespace BusinessObjects.Models
 
                 entity.HasIndex(e => e.Email, "UQ__tblUser__A9D105343174A929")
                     .IsUnique();
-
+                entity.Property(e => e.image).HasMaxLength(255);
                 entity.HasIndex(e => e.UserName, "UQ__tblUser__C9F28456BCFE7C36")
                     .IsUnique();
 

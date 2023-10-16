@@ -6,31 +6,47 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using BusinessObjects.Models;
-
+using Repositories.IRepository;
 namespace BirdFarmShop.Pages
 {
     public class LoginModel : PageModel
     {
-        private readonly BusinessObjects.Models.BirdFarmShopContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public LoginModel(BusinessObjects.Models.BirdFarmShopContext context)
+        public LoginModel(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
         [BindProperty]
-        public TblUser TblUser { get; set; } = default!;
+        public TblUser user { get; set; } = default!;
         
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
+      
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
+            
+            if(!string.IsNullOrWhiteSpace(user.UserName) && !string.IsNullOrWhiteSpace(user.Pass))
             {
-                return Page();
+                var check = _userRepository.checkLogin(user.UserName,user.Pass);
+                if(check != null)
+                {
+                    if (check.RoleId.Equals("US"))
+                    {
+                        HttpContext.Session.SetInt32("UserID", check.UserId);
+                        return RedirectToPage("User/Profile");
+                    }
+                    if (check.RoleId.Equals("AD"))
+                    {
+
+                    }
+                }
+                
             }
 
-            return RedirectToPage("./Index");
+
+
+            return Page();
         }
     }
 }
