@@ -38,7 +38,8 @@ namespace BirdFarmShop.Pages
                     }
                     if (check.RoleId.Equals("AD"))
                     {
-
+                        //HttpContext.Session.SetString("isAdmin");
+                        return RedirectToPage("Admin/UserManagement/ShowUserList");
                     }
                 }
                 

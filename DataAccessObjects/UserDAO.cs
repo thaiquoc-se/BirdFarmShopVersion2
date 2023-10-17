@@ -83,6 +83,17 @@ namespace DataAccessObjects
 
             return userList;
         }
+        public TblUser GetUserByEmail(string email)
+        {
+            try
+            {
+                return _context.TblUsers.Where(u => u.Email.Equals(email)).SingleOrDefault()!;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public UserDTO GetUserDTOByID(int id)
         {
@@ -114,7 +125,7 @@ namespace DataAccessObjects
         {
             try
             {  
-                _context.Add(user);
+                _context.TblUsers.Add(user);
                 _context.SaveChanges();
             }
             catch (Exception ex)

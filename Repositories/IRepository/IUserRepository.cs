@@ -13,7 +13,7 @@ namespace Repositories.IRepository
         List<UserDTO> GetAllUsers();
 
         UserDTO GetUserDTOById(int id);
-
+        TblUser GetUserByEmail(string email);
         TblUser GetUserByID(int id);
         
         void AddNew(TblUser user);

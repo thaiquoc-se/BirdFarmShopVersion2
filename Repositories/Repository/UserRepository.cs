@@ -21,6 +21,8 @@ namespace Repositories.Repository
         
 
         public List<UserDTO> GetAllUsers() => UserDAO.Instance.GetAllUsers();
+
+        public TblUser GetUserByEmail(string email) => UserDAO.Instance.GetUserByEmail(email);
         
 
         public TblUser GetUserByID(int id) => UserDAO.Instance.GetUserByID(id);
