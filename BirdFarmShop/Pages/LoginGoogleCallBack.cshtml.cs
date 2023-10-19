@@ -25,7 +25,7 @@ namespace BirdFarmShop.Pages
 
             if (authenticateResult.Succeeded)
             {
-               
+
                 var userFullName = authenticateResult.Principal.FindFirstValue(ClaimTypes.Name);
                 var userEmail = authenticateResult.Principal.FindFirstValue(ClaimTypes.Email);
                 var address = authenticateResult.Principal.FindFirstValue(ClaimTypes.StreetAddress);
@@ -37,7 +37,7 @@ namespace BirdFarmShop.Pages
 
                 if (checkUserExisted != null)
                 {
-                    HttpContext.Session.SetInt32("UserID",checkUserExisted.UserId);
+                    HttpContext.Session.SetInt32("UserID", checkUserExisted.UserId);
                     return RedirectToPage("User/Profile");
                 }
                 TblUser user = new TblUser()
@@ -45,10 +45,10 @@ namespace BirdFarmShop.Pages
                     FullName = userFullName,
                     Email = userEmail,
                     RoleId = "US",
-                    UserAddress =address,
+                    UserAddress = address,
                     UserStatus = true,
                     Phone = phone,
-                    Pass ="@1"
+                    Pass = "@1"
                 };
                 _birdFarmShopContext.TblUsers.Add(user);
                 _birdFarmShopContext.SaveChanges();

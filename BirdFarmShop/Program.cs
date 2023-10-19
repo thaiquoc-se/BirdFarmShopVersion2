@@ -1,8 +1,12 @@
-﻿using BusinessObjects.Models;
+﻿using BirdFarmShop.Pages;
+using BusinessObjects.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Repositories.IRepository;
 using Repositories.Repository;
 using System.Configuration;
@@ -12,22 +16,30 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddRazorPages();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = "Cookies";
     options.DefaultChallengeScheme = "Google"; // Hoặc tên của nhà cung cấp xác thực khác
 })
     .AddCookie("Cookies")
-    .AddGoogle("Google",googleOptions =>
+    .AddGoogle("Google", googleOptions =>
     {
         // Đọc thông tin Authentication:Google từ appsettings.json
         IConfigurationSection googleAuthNSection = builder.Configuration.GetSection("Authentication:Google");
 
         // Thiết lập ClientID và ClientSecret để truy cập API google
-        googleOptions.ClientId = googleAuthNSection["ClientId"];
-        googleOptions.ClientSecret = googleAuthNSection["ClientSecret"];
+        googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+        googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
         // Cấu hình Url callback lại từ Google (không thiết lập thì mặc định là /signin-google)
-        googleOptions.CallbackPath = "/CallBack";
+        googleOptions.CallbackPath = "/LoginGoogleCallBack";
 
     });
 builder.Services.AddSession(options =>
@@ -62,7 +74,6 @@ app.UseRouting();
 app.UseAuthentication();
 
 app.UseAuthorization();
-
 
 app.MapRazorPages();
 
