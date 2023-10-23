@@ -24,12 +24,12 @@
             <h2>Login</h2>
             <form method="post">
                 <div class="input-box">
-                    <input asp-for="user.UserName" class="form-control" />
+                    <input asp-for="user.UserName"  />
                     <span asp-validation-for="user.UserName" class="text-danger"></span>
                     <label>User Name</label>
                 </div>
                 <div class="input-box">
-                    <input asp-for="user.Pass" class="form-control" />
+                    <input asp-for="user.Pass"/>
                     <span asp-validation-for="user.Pass" class="text-danger"></span>
                     <label>Password</label>
                 </div>
@@ -63,7 +63,7 @@
         
     </div>
     <!-- Optional JavaScript -->
-    <script src="~/js/login.js"></script>
+    
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

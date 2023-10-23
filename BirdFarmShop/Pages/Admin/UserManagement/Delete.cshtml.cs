@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
 
-namespace BirdFarmShop.Pages.Test
+namespace BirdFarmShop.Pages.Admin.UserManagement
 {
     public class DeleteModel : PageModel
     {
@@ -56,7 +56,7 @@ namespace BirdFarmShop.Pages.Test
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./ShowUserList");
         }
     }
 }

@@ -9,24 +9,42 @@ using BusinessObjects.Models;
 using Repositories.IRepository;
 using BusinessObjects.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using Services.IServices;
 
 namespace BirdFarmShop.Pages.Manager.StaffManagement
 {
     
     public class IndexModel : PageModel
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public IndexModel(IUserRepository userRepository)
+        public IndexModel(IUserService userService)
         {
-            _userRepository = userRepository;
+            _userService = userService;
         }
 
         public List<UserDTO> TblUser { get;set; } = default!;
-
-        public void OnGet()
+        public string isManager = null!;
+        public IActionResult OnGet()
         {
-            TblUser = _userRepository.GetAllUsers().Where(u => u.RoleId.Equals("ST")).ToList();
+            try
+            {
+                isManager = HttpContext.Session.GetString("isManager")!;
+                if (isManager != "MN")
+                {
+                    return NotFound();
+                }
+                if (isManager == null)
+                {
+                    return NotFound();
+                }
+            }
+            catch
+            {
+                NotFound();
+            }
+            TblUser = _userService.GetAllUsers().Where(u => u.RoleId.Equals("ST")).ToList();
+            return Page();
         }
     }
 }

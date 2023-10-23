@@ -35,13 +35,7 @@
                 @Html.DisplayNameFor(model => model.TblUser[0].UserStatus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblUser[0].District)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TblUser[0].Role)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TblUser[0].Ward)
+                @Html.DisplayNameFor(model => model.TblUser[0].RoleName)
             </th>
             <th></th>
         </tr>
@@ -71,14 +65,9 @@
                 @Html.DisplayFor(modelItem => item.UserStatus)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.District.DistrictId)
+                @Html.DisplayFor(modelItem => item.RoleName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role.RoleId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ward.WardId)
-            </td>
+
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.UserId">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.UserId">Details</a> |

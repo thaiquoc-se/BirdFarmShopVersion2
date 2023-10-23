@@ -18,10 +18,27 @@ namespace BirdFarmShop.Pages.Manager.StaffManagement
             _context = context;
         }
 
-      public TblUser TblUser { get; set; } = default!; 
+      public TblUser TblUser { get; set; } = default!;
+        public string isManager;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            try
+            {
+                isManager = HttpContext.Session.GetString("isManager")!;
+                if (isManager != "MN")
+                {
+                    return NotFound();
+                }
+                if (isManager == null)
+                {
+                    return NotFound();
+                }
+            }
+            catch
+            {
+                NotFound();
+            }
             if (id == null || _context.TblUsers == null)
             {
                 return NotFound();

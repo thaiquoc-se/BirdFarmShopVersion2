@@ -6,29 +6,46 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Microsoft.AspNetCore.Authorization;
+using BusinessObjects.DTOs;
+using Repositories.IRepository;
 
 namespace BirdFarmShop.Pages.Admin.UserManagement
 {
     public class ShowUserListModel : PageModel
     {
-        private readonly BusinessObjects.Models.BirdFarmShopContext _context;
+        private readonly IUserRepository _userRepository;
 
-        public ShowUserListModel(BusinessObjects.Models.BirdFarmShopContext context)
+        public ShowUserListModel(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
-        public IList<TblUser> TblUser { get;set; } = default!;
+        public IList<UserDTO> TblUser { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        
+        public string isAdmin = null!;
+
+        public IActionResult OnGet()
         {
-            if (_context.TblUsers != null)
+            try
             {
-                TblUser = await _context.TblUsers
-                .Include(t => t.District)
-                .Include(t => t.Role)
-                .Include(t => t.Ward).ToListAsync();
+                isAdmin = HttpContext.Session.GetString("isAdmin")!;
+                if (isAdmin != "AD")
+                {
+                   return NotFound();
+                }
+                if(isAdmin == null)
+                {
+                  return  NotFound();
+                }
             }
+            catch
+            {
+                NotFound();
+            }
+            TblUser = _userRepository.GetAllUsers().Where(u => !u.RoleId.Equals("AD")).ToList();
+            return Page();
         }
     }
 }
