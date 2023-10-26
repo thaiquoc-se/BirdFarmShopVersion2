@@ -37,7 +37,7 @@
         <div class="container">
 
             <h1>
-                <a href="#" class="logo">Bird Store</a>
+                <a asp-page="HomePage" class="logo">Bird Store</a>
             </h1>
 
             <button class="nav-open-btn" aria-label="Open Menu" data-nav-open-btn>
@@ -83,6 +83,13 @@
                         <a href="#" class="navbar-link" data-nav-link>
                             <span>Liên hệ</span>
 
+                            <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a asp-page="ShowAllBirds" class="navbar-link" data-nav-link>
+                            <span>Birds</span>
                             <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
                         </a>
                     </li>

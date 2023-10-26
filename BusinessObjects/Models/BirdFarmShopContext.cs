@@ -61,6 +61,8 @@ namespace BusinessObjects.Models
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
+                entity.Property(e => e.Price).HasColumnType("decimal(18, 0)");
+
                 entity.Property(e => e.WeightofBirds).HasMaxLength(50);
 
                 entity.HasOne(d => d.User)

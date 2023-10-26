@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositorie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BirdFarmShop", "BirdFarmShop\BirdFarmShop.csproj", "{F067399F-5BC2-4D1E-9933-AF28069F8D04}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{8AF09CA0-B7B9-444E-ADD8-A9B6816D036B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{8AF09CA0-B7B9-444E-ADD8-A9B6816D036B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

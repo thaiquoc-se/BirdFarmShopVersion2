@@ -21,6 +21,9 @@ namespace BusinessObjects.Models
         public string? BirdDescription { get; set; }
         public bool? BirdStatus { get; set; }
 
+        public int? Quantity { get; set; }
+        public decimal Price { get; set; }
+
         public virtual TblUser User { get; set; } = null!;
         public virtual ICollection<TblComment> TblComments { get; set; }
         public virtual ICollection<TblOrderDetail> TblOrderDetails { get; set; }

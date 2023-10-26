@@ -114,7 +114,7 @@ namespace DataAccessObjects
                 return _context.TblUsers
                 .Include(t => t.District)
                 .Include(t => t.Role)
-                .Include(t => t.Ward).FirstOrDefault()!;
+                .Include(t => t.Ward).Where(t => t.UserId == id).FirstOrDefault()!;
             }
             catch (Exception ex)
             {

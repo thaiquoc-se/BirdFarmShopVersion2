@@ -9,16 +9,17 @@ using BusinessObjects.Models;
 using Microsoft.AspNetCore.Authorization;
 using BusinessObjects.DTOs;
 using Repositories.IRepository;
+using Services.IServices;
 
 namespace BirdFarmShop.Pages.Admin.UserManagement
 {
     public class ShowUserListModel : PageModel
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserService _userService;
 
-        public ShowUserListModel(IUserRepository userRepository)
+        public ShowUserListModel(IUserService userService)
         {
-            _userRepository = userRepository;
+            _userService = userService;
         }
 
         public IList<UserDTO> TblUser { get;set; } = default!;
@@ -44,7 +45,7 @@ namespace BirdFarmShop.Pages.Admin.UserManagement
             {
                 NotFound();
             }
-            TblUser = _userRepository.GetAllUsers().Where(u => !u.RoleId.Equals("AD")).ToList();
+            TblUser = _userService.GetAllUsers().Where(u => !u.RoleId.Equals("AD")).ToList();
             return Page();
         }
     }

@@ -1,0 +1,50 @@
+﻿@page
+@model BirdFarmShop.Pages.CartModel
+@{
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cart</title>
+</head>
+<body>
+
+    <h3>Cart</h3>
+    <form method="post" asp-page="cart" asp-page-handler="update">
+        <table border="1">
+            <tr>
+                <th>Action</th>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Photo</th>
+                <th>Price</th>
+                <th>Quantity <input type="submit" value="Update" /></th>
+                <th>Sub Total</th>
+            </tr>
+            @foreach (var item in Model.cart)
+            {
+                <tr align="center">
+                    <td align="center">
+                        <a asp-page="cart" asp-page-handler="delete" asp-route-id="@item.bird.BirdId">Remove</a>
+                    </td>
+                    <td>@item.bird.BirdId</td>
+                    <td>@item.bird.BirdName</td>
+                    <td><img src="~/img/chim1.png" width="120" height="100" /></td>
+                    <td>@item.bird.Price VNĐ</td>
+                    <td><input type="number" name="quantities" value="@item.Quantity" min="1" style="width: 50px;" /></td>
+                    <td>
+                        @(item.bird.Price * item.Quantity) VNĐ
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="6" align="right">Total</td>
+                <td align="center">@Model.Total VNĐ</td>
+            </tr>
+        </table>
+        <button type="submit" formaction="CheckOut">BUY</button>
+    </form>
+    <a asp-page="ShowAllBirds">Continue Shopping</a>
+
+</body>
+</html>

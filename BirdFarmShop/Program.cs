@@ -22,7 +22,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(10);
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
@@ -56,6 +56,8 @@ builder.Services.AddScoped<IWardRepository, WardRepository>();
 builder.Services.AddScoped<IWardService, WardService>();
 builder.Services.AddScoped<IDistrictRepository, DistrictRepository>();
 builder.Services.AddScoped<IDistrictService, DistrictService>();
+builder.Services.AddScoped<IBirdRepository, BirdRepository>();
+builder.Services.AddScoped<IBirdService, BirdService>();
 builder.Services.AddRazorPages().AddRazorPagesOptions(options => { options.Conventions.AddPageRoute("/HomePage", ""); });
 builder.Services.AddDbContext<BirdFarmShopContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BirdFarmShop") ?? throw new InvalidOperationException("Connection string 'BirdFarmShop' not found.")));

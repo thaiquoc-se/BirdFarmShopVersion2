@@ -1,0 +1,74 @@
+﻿@page
+@model BirdFarmShop.Pages.ShowAllBirdsModel
+
+@{
+    ViewData["Title"] = "ShowAllBirds";
+}
+
+<h1>ShowAllBirds</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bird[0].BirdName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bird[0].Estimation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bird[0].Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bird[0].WeightofBirds)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bird[0].BirdDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bird[0].BirdStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bird[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bird[0].Quantity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Bird) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirdName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estimation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WeightofBirds)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirdDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BirdStatus)
+            </td>
+           <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+            <td>
+                    <a asp-page="./Cart" asp-page-handler="addtocart" asp-route-id="@item.BirdId">Add To Cart</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

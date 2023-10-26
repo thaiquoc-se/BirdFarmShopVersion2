@@ -90,7 +90,7 @@
                                 <p>@Model.TblUser.UserAddress</p>
                             </div>
                         </div>
-                        <a asp-page="./Edit" asp-route-id="@HttpContext.Session.GetInt32("UserID")"><button><i class="fa fa-edit"></i>Edit profile</button></a>
+                        <a asp-page="./UpdateProfile" asp-route-id="@HttpContext.Session.GetInt32("UserID")"><button><i class="fa fa-edit"></i>Edit profile</button></a>
                     </div>
                 </div>
             </div>
