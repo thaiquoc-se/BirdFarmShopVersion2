@@ -31,12 +31,12 @@ namespace BirdFarmShop.Pages.User
             }
             catch
             {
-                return NotFound();
+                return RedirectToPage("/Login");
             }
             var tbluser = _userService.GetUserDTOById(UserID);
             if (tbluser == null)
             {
-                return NotFound();
+                return RedirectToPage("Login");
             }
             else 
             {

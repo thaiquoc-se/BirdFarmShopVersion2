@@ -71,7 +71,7 @@ namespace DataAccessObjects
                     FullName = user.FullName,
                     UserStatus = user.UserStatus,
                     RoleId = user.RoleId,
-                    image = user.image,
+                    image = user.Image,
                     RoleName = user.Role.RoleName!,
                     Pass = user.Pass,
                     Email = user.Email,

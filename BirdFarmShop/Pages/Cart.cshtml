@@ -8,6 +8,7 @@
     <title>Cart</title>
 </head>
 <body>
+   
 
     <h3>Cart</h3>
     <form method="post" asp-page="cart" asp-page-handler="update">
@@ -42,8 +43,9 @@
                 <td align="center">@Model.Total VNĐ</td>
             </tr>
         </table>
-        <button type="submit" formaction="CheckOut">BUY</button>
+        
     </form>
+    <a asp-page="CheckOut">Buy</a>
     <a asp-page="ShowAllBirds">Continue Shopping</a>
 
 </body>

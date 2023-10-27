@@ -1,6 +1,5 @@
 ﻿using BirdFarmShop.Pages;
 using BusinessObjects.Models;
-using BusinessObjects.Policies;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
@@ -12,6 +11,7 @@ using Repositories.IRepository;
 using Repositories.Repository;
 using Services.IServices;
 using Services.Services;
+using Services.UnitOfWork;
 using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,6 +58,11 @@ builder.Services.AddScoped<IDistrictRepository, DistrictRepository>();
 builder.Services.AddScoped<IDistrictService, DistrictService>();
 builder.Services.AddScoped<IBirdRepository, BirdRepository>();
 builder.Services.AddScoped<IBirdService, BirdService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddRazorPages().AddRazorPagesOptions(options => { options.Conventions.AddPageRoute("/HomePage", ""); });
 builder.Services.AddDbContext<BirdFarmShopContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("BirdFarmShop") ?? throw new InvalidOperationException("Connection string 'BirdFarmShop' not found.")));

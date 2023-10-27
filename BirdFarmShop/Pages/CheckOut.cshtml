@@ -2,3 +2,73 @@
 @model BirdFarmShop.Pages.CheckOutModel
 @{
 }
+
+<h1>CheckInformation</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="TblUser.FullName" class="control-label"></label>
+                <input asp-for="TblUser.FullName" class="form-control" />
+                <span asp-validation-for="TblUser.FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblUser.Phone" class="control-label"></label>
+                <input asp-for="TblUser.Phone" class="form-control" />
+                <span asp-validation-for="TblUser.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblUser.UserAddress" class="control-label"></label>
+                <input asp-for="TblUser.UserAddress" class="form-control" />
+                <span asp-validation-for="TblUser.UserAddress" class="text-danger"></span>
+            </div>
+            <button type="submit" formaction="CheckOut">Check Out</button>
+        </form>
+    </div>
+</div>
+
+<form method="post" asp-page="cart" asp-page-handler="update">
+    <table border="1">
+        <tr>
+            <th>Action</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Photo</th>
+            <th>Price</th>
+            <th>Quantity <input type="submit" value="Update" /></th>
+            <th>Sub Total</th>
+        </tr>
+        @foreach (var item in Model.cart)
+        {
+            <tr align="center">
+                <td align="center">
+                    <a asp-page="cart" asp-page-handler="delete" asp-route-id="@item.bird.BirdId">Remove</a>
+                </td>
+                <td>@item.bird.BirdId</td>
+                <td>@item.bird.BirdName</td>
+                <td><img src="~/img/chim1.png" width="120" height="100" /></td>
+                <td>@item.bird.Price VNĐ</td>
+                <td><input type="number" name="quantities" value="@item.Quantity" min="1" style="width: 50px;" /></td>
+                <td>
+                    @(item.bird.Price * item.Quantity) VNĐ
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="6" align="right">Total</td>
+            <td align="center">@Model.Total VNĐ</td>
+        </tr>
+    </table>
+    
+</form>
+<a asp-page="ShowAllBirds">Continue Shopping</a>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

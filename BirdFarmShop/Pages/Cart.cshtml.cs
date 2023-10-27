@@ -11,15 +11,27 @@ namespace BirdFarmShop.Pages
         private readonly IBirdService _birdService;
         public CartModel(IBirdService birdService) 
         {
-            _birdService = birdService;       
+            _birdService = birdService;
         }
         public List<Item> cart { get; set; }
         public decimal  Total { get; set; }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-            Total = cart.Sum(i => i.bird.Price * i.Quantity);
+            try
+            {
+                cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+                if(cart == null) 
+                {
+                    return RedirectToPage("CartEmpty");
+                }
+                Total = cart.Sum(i => i.bird.Price * i.Quantity);
+            }
+            catch
+            {
+                return NotFound();
+            }
+            return Page();
         }
 
         public IActionResult OnGetAddToCart(int id)

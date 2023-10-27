@@ -1,0 +1,60 @@
+﻿@page
+@model BirdFarmShop.Pages.Test.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TblOrderDetail[0].TotalPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblOrderDetail[0].Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblOrderDetail[0].CostsIncurred)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblOrderDetail[0].Bird)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblOrderDetail[0].Order)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TblOrderDetail) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostsIncurred)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bird.BirdName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.ShipAddress)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

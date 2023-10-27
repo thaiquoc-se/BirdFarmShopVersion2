@@ -24,7 +24,9 @@ namespace BirdFarmShop.Pages.Manager.StaffManagement
         }
 
         public List<UserDTO> TblUser { get;set; } = default!;
+        public UserDTO TblUserDTO { get;set; }
         public string isManager = null!;
+        public int UserId;
         public IActionResult OnGet()
         {
             try
@@ -44,6 +46,8 @@ namespace BirdFarmShop.Pages.Manager.StaffManagement
                 NotFound();
             }
             TblUser = _userService.GetAllUsers().Where(u => u.RoleId.Equals("ST")).ToList();
+            UserId = (int)HttpContext.Session.GetInt32("UserID")!;
+            TblUserDTO = _userService.GetUserDTOById(UserId);
             return Page();
         }
     }

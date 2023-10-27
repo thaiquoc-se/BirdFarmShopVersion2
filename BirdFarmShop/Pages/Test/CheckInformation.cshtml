@@ -1,11 +1,11 @@
 ﻿@page
-@model BirdFarmShop.Pages.User.UpdateProfileModel
+@model BirdFarmShop.Pages.Test.CheckInformationModel
 
 @{
-    ViewData["Title"] = "UpdateProfile";
+    ViewData["Title"] = "CheckInformation";
 }
 
-<h1>UpdateProfile</h1>
+<h1>CheckInformation</h1>
 
 <h4>TblUser</h4>
 <hr />
@@ -28,11 +28,6 @@
                 <label asp-for="TblUser.DistrictId" class="control-label"></label>
                 <select asp-for="TblUser.DistrictId" class="form-control" asp-items="ViewBag.DistrictId"></select>
                 <span asp-validation-for="TblUser.DistrictId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TblUser.Image" class="control-label"></label>
-                <input asp-for="TblUser.Image" class="form-control" />
-                <span asp-validation-for="TblUser.Image" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TblUser.UserName" class="control-label"></label>
@@ -68,6 +63,11 @@
                 <label asp-for="TblUser.UserStatus" class="control-label"></label>
                 <input asp-for="TblUser.UserStatus" class="form-control" />
                 <span asp-validation-for="TblUser.UserStatus" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblUser.Image" class="control-label"></label>
+                <input asp-for="TblUser.Image" class="form-control" />
+                <span asp-validation-for="TblUser.Image" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

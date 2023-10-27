@@ -48,7 +48,7 @@ namespace BirdFarmShop.Pages
                     Pass = TblUser.Pass,
                     DistrictId = TblUser.DistrictId,
                     WardId = TblUser.WardId,
-                    image = "https://firebasestorage.googleapis.com/v0/b/birdfarmshop-firebase.appspot.com/o/default-avatar.png?alt=media&token=44c5ecec-0d64-402f-8f58-https://firebasestorage.googleapis.com/v0/b/birdfarmshop-firebase.appspot.com/o/default-avatar.png?alt=media&token=44c5ecec-0d64-402f-8f58-bc67824aff95&_gl=1*1pzluj4*_ga*MTc2MDE3MTQ5NS4xNjY2NDQ2MTgy*_ga_CW55HF8NVT*MTY5NzcwNjg0MS40LjEuMTY5NzcwNzM5Mi42MC4wLjA.",
+                    Image = "https://firebasestorage.googleapis.com/v0/b/birdfarmshop-firebase.appspot.com/o/default-avatar.png?alt=media&token=44c5ecec-0d64-402f-8f58-https://firebasestorage.googleapis.com/v0/b/birdfarmshop-firebase.appspot.com/o/default-avatar.png?alt=media&token=44c5ecec-0d64-402f-8f58-bc67824aff95&_gl=1*1pzluj4*_ga*MTc2MDE3MTQ5NS4xNjY2NDQ2MTgy*_ga_CW55HF8NVT*MTY5NzcwNjg0MS40LjEuMTY5NzcwNzM5Mi42MC4wLjA.",
                     FullName = TblUser.FullName,
                     Phone = TblUser.Phone,
                     UserAddress = TblUser.UserAddress,
