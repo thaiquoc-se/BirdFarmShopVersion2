@@ -163,7 +163,7 @@
                                         <td>
                                             <select class="form-select-sm" aria-label="Default select example">
                                                 <option selected>Choose</option>
-                                                if (item.UserStatus == "active")
+                                                @if (item.UserStatus == true)
                                                 {
                                                 <option value="1">@Html.DisplayFor(modelItem => item.UserStatus)</option>
                                                 }

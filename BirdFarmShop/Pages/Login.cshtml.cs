@@ -37,7 +37,7 @@ namespace BirdFarmShop.Pages
                     if (check.RoleId.Equals("US"))
                     {
                         HttpContext.Session.SetInt32("UserID", check.UserId);
-                        return RedirectToPage("User/Profile");
+                        return RedirectToPage("HomePage");
                     }
                     if (check.RoleId.Equals("AD"))
                     {

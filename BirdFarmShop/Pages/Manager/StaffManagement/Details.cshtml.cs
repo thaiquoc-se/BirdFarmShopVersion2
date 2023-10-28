@@ -6,19 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Services.IServices;
+using BusinessObjects.DTOs;
 
 namespace BirdFarmShop.Pages.Manager.StaffManagement
 {
     public class DetailsModel : PageModel
     {
-        private readonly BusinessObjects.Models.BirdFarmShopContext _context;
+        private readonly IUserService _userService;
 
-        public DetailsModel(BusinessObjects.Models.BirdFarmShopContext context)
+        public DetailsModel(IUserService userService)
         {
-            _context = context;
+            _userService = userService;
         }
 
-      public TblUser TblUser { get; set; } = default!;
+        public UserDTO TblUser { get; set; } = default!;
         public string isManager;
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -39,12 +41,9 @@ namespace BirdFarmShop.Pages.Manager.StaffManagement
             {
                 NotFound();
             }
-            if (id == null || _context.TblUsers == null)
-            {
-                return NotFound();
-            }
 
-            var tbluser = await _context.TblUsers.FirstOrDefaultAsync(m => m.UserId == id);
+
+            var tbluser = _userService.GetUserDTOById(id.Value);
             if (tbluser == null)
             {
                 return NotFound();
