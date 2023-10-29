@@ -21,6 +21,11 @@ namespace Services.Services
         
 
         public List<Bird> GetAllBirds() => _birdRepository.GetAllBirds();
+
+        public void AddNew(Bird bird) => _birdRepository.AddNew(bird);
+        
+
+        public void Update(Bird bird) => _birdRepository.Update(bird);
         
     }
 }

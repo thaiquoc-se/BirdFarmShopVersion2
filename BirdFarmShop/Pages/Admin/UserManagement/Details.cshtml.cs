@@ -6,48 +6,52 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
-using Microsoft.AspNetCore.Authorization;
-using BusinessObjects.DTOs;
-using Repositories.IRepository;
 using Services.IServices;
+using BusinessObjects.DTOs;
 
 namespace BirdFarmShop.Pages.Admin.UserManagement
 {
-    public class ShowUserListModel : PageModel
+    public class DetailsModel : PageModel
     {
         private readonly IUserService _userService;
 
-        public ShowUserListModel(IUserService userService)
+        public DetailsModel(IUserService userService)
         {
             _userService = userService;
         }
 
-        public IList<UserDTO> TblUser { get;set; } = default!;
-        public UserDTO TblUserDTO { get; set; }
-        public int UserId;
-        public string isAdmin = null!;
+        public UserDTO TblUser { get; set; } = default!;
+        public string isAdmin;
 
-        public IActionResult OnGet()
+        public IActionResult OnGet(int? id)
         {
             try
             {
                 isAdmin = HttpContext.Session.GetString("isAdmin")!;
                 if (isAdmin != "AD")
                 {
-                   return NotFound();
+                    return NotFound();
                 }
-                if(isAdmin == null)
+                if (isAdmin == null)
                 {
-                  return  NotFound();
+                    return NotFound();
                 }
             }
             catch
             {
                 NotFound();
             }
-            TblUser = _userService.GetAllUsers().Where(u => !u.RoleId.Equals("AD")).ToList();
-            UserId = (int)HttpContext.Session.GetInt32("UserID")!;
-            TblUserDTO = _userService.GetUserDTOById(UserId);
+
+
+            var tbluser = _userService.GetUserDTOById(id.Value);
+            if (tbluser == null)
+            {
+                return NotFound();
+            }
+            else 
+            {
+                TblUser = tbluser;
+            }
             return Page();
         }
     }

@@ -1,11 +1,11 @@
 ﻿@page
-@model BirdFarmShop.Pages.Admin.UserManagement.CreateModel
+@model BirdFarmShop.Pages.Admin.UserManagement.EditModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Edit";
 }
 
-<h1>Create</h1>
+<h1>Edit</h1>
 
 <h4>TblUser</h4>
 <hr />
@@ -13,19 +13,22 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="TblUser.RoleId" class="control-label"></label>
-                <select asp-for="TblUser.RoleId" class ="form-control" asp-items="ViewBag.RoleName"></select>
-            </div>
+            <input type="hidden" asp-for="TblUser.UserId" />
             <div class="form-group">
                 <label asp-for="TblUser.WardId" class="control-label"></label>
-                <select asp-for="TblUser.WardId" class ="form-control" asp-items="ViewBag.WardName"></select>
+                <select asp-for="TblUser.WardId" class="form-control" asp-items="ViewBag.WardName"></select>
+                <span asp-validation-for="TblUser.WardId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="TblUser.DistrictId" class="control-label"></label>
-                <select asp-for="TblUser.DistrictId" class ="form-control" asp-items="ViewBag.DistrictName"></select>
+                <select asp-for="TblUser.DistrictId" class="form-control" asp-items="ViewBag.DistrictName"></select>
+                <span asp-validation-for="TblUser.DistrictId" class="text-danger"></span>
             </div>
-           
+            <div class="form-group">
+                <label asp-for="TblUser.Image" class="control-label"></label>
+                <input asp-for="TblUser.Image" class="form-control" />
+                <span asp-validation-for="TblUser.Image" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="TblUser.UserName" class="control-label"></label>
                 <input asp-for="TblUser.UserName" class="form-control" />
@@ -62,14 +65,14 @@
                 <span asp-validation-for="TblUser.UserStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="./ShowUserList">Back to List</a>
 </div>
 
 @section Scripts {

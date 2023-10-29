@@ -7,11 +7,8 @@ using System.Threading.Tasks;
 
 namespace Services.IServices
 {
-    public interface IBirdService
+    public interface IRoleService
     {
-        List<Bird> GetAllBirds();
-        Bird GetBirdByID(int id);
-        void AddNew(Bird bird);
-        void Update(Bird bird);
+        List<TblRole> GetRoles();
     }
 }

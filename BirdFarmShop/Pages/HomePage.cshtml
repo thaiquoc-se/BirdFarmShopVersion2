@@ -1,7 +1,10 @@
 ﻿@page
 @model BirdFarmShop.Pages.HomePageModel
+@using Microsoft.AspNetCore.Http
 @{
+    var userId = HttpContext.Session.GetString("UserID");
 }
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -99,15 +102,29 @@
             </nav>
 
             <div class="header-action">
+                @if (string.IsNullOrEmpty(userId))
+                {
+                    <button class="search-btn" aria-label="Search">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </button>
 
-                <button class="search-btn" aria-label="Search">
-                    <ion-icon name="search-outline"></ion-icon>
-                </button>
+                    <button class="btn btn-primary" onclick="window.location.href='./Login'">
+                        <span>Đăng nhập</span>
+                        <ion-icon name="log-in-outline"></ion-icon>
+                    </button>
+                }
+                else
+                {
+                    <button class="search-btn" aria-label="Search">
+                        <ion-icon name="search-outline"></ion-icon>
+                    </button>
 
-                <button class="btn btn-primary" onclick="window.location.href='./Login'">
-                    <span>Đăng nhập</span>
-                    <ion-icon name="log-in-outline"></ion-icon>
-                </button>
+                    <button class="btn btn-primary" onclick="window.location.href='./Logout'">
+                        <span>Logout</span>
+                        <ion-icon name="log-in-outline"></ion-icon>
+                    </button>
+                }
+
 
             </div>
 

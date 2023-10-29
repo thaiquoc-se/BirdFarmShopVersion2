@@ -15,6 +15,11 @@ namespace Repositories.Repository
         
 
         public List<Bird> GetAllBirds() => BirdDAO.Instance.GetAllBirds();
+
+        public void AddNew(Bird bird) => BirdDAO.Instance.AddNew(bird);
+       
+
+        public void Update(Bird bird) => BirdDAO.Instance.Update(bird);
         
     }
 }

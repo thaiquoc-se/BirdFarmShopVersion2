@@ -11,5 +11,8 @@ namespace Repositories.IRepository
     {
         List<Bird> GetAllBirds();
         Bird GetBirdByID(int id);
+
+        void AddNew(Bird bird);
+        void Update(Bird bird);
     }
 }

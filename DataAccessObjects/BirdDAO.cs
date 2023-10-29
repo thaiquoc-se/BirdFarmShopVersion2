@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace DataAccessObjects
         {
             try
             {
-                return _context.Birds.ToList();
+                return _context.Birds.Include(b => b.User).ToList();
             }catch (Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -54,6 +55,42 @@ namespace DataAccessObjects
             }catch (Exception ex)
             {
             throw new Exception(ex.Message);
+            }
+        }
+
+        public void AddNew(Bird bird)
+        {
+            try
+            {
+                _context.Birds.Add(bird);
+                _context.SaveChanges(); 
+            }catch  (Exception ex)
+            {
+                    throw new Exception(ex.Message);
+            }
+        }
+
+        public void Update(Bird bird)
+        {
+            try
+            {
+                var _bird = _context.Birds.Where(b => b.BirdId == bird.BirdId).SingleOrDefault();
+                if (_bird != null)
+                {
+                    _bird.BirdId = bird.BirdId;
+                    _bird.BirdName = bird.BirdName;
+                    _bird.BirdStatus = bird.BirdStatus;
+                    _bird.BirdDescription = bird.BirdDescription;
+                    _bird.Price = bird.Price;
+                    _bird.Quantity = bird.Quantity;
+                    _bird.WeightofBirds = bird.WeightofBirds;
+                    _bird.Estimation = bird.Estimation;
+                    _bird.Gender = bird.Gender;
+                    _bird.UserId = bird.UserId;
+                }
+            }catch  (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }

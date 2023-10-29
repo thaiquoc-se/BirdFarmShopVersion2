@@ -51,6 +51,12 @@ namespace BirdFarmShop.Pages
                         HttpContext.Session.SetString("isManager", check.RoleId);
                         return RedirectToPage("Manager/StaffManagement/Index");
                     }
+                    if (check.RoleId.Equals("ST"))
+                    {
+                        HttpContext.Session.SetInt32("UserID", check.UserId);
+                        HttpContext.Session.SetString("isStaff", check.RoleId);
+                        return RedirectToPage("Staff/BirdManagement/Index");
+                    }
                 }
                 
             }
