@@ -7,73 +7,71 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Services.IServices;
 
 namespace BirdFarmShop.Pages.User
 {
     public class UpdateProfileModel : PageModel
     {
-        private readonly BusinessObjects.Models.BirdFarmShopContext _context;
-
-        public UpdateProfileModel(BusinessObjects.Models.BirdFarmShopContext context)
+        private readonly IDistrictService _districtService;
+        private readonly IWardService _wardService;
+        private readonly IUserService _userService;
+        public UpdateProfileModel(IDistrictService districtService, IWardService wardService, IUserService userService)
         {
-            _context = context;
+            _districtService = districtService;
+            _wardService = wardService;
+            _userService = userService;
+
         }
 
         [BindProperty]
         public TblUser TblUser { get; set; } = default!;
-
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public int UserId;
+        public IActionResult OnGet(int? id)
         {
-            if (id == null || _context.TblUsers == null)
+            try
+            {
+                UserId = (int)HttpContext.Session.GetInt32("UserID")!;
+                if (UserId != id.Value )
+                {
+                    return BadRequest();
+                }
+            }
+            catch
             {
                 return NotFound();
             }
 
-            var tbluser =  await _context.TblUsers.FirstOrDefaultAsync(m => m.UserId == id);
+            var tbluser = _userService.GetUserByID(id.Value);
             if (tbluser == null)
             {
                 return NotFound();
             }
             TblUser = tbluser;
-           ViewData["DistrictId"] = new SelectList(_context.TblDistricts, "DistrictId", "DistrictId");
-           ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleId");
-           ViewData["WardId"] = new SelectList(_context.TblWards, "WardId", "WardId");
+            ViewData["DistrictName"] = new SelectList(_districtService.GetDistricts(), "DistrictId", "DistrictName");
+            ViewData["WardName"] = new SelectList(_wardService.GetWards(), "WardId", "WardName");
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
+            try
             {
+                _userService.Update(TblUser);
+            }
+            catch
+            {
+                OnGet(TblUser.UserId);
                 return Page();
             }
 
-            _context.Attach(TblUser).State = EntityState.Modified;
+            
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TblUserExists(TblUser.UserId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
+            return RedirectToPage("Profile");
         }
 
-        private bool TblUserExists(int id)
-        {
-          return (_context.TblUsers?.Any(e => e.UserId == id)).GetValueOrDefault();
-        }
+        
     }
 }

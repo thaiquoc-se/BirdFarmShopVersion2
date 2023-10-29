@@ -46,9 +46,9 @@ namespace BirdFarmShop.Pages.Manager.StaffManagement
             }
 
             var tbluser = _userService.GetUserByID(id.Value);
-            if (tbluser == null)
+            if (tbluser.RoleId != "ST")
             {
-                return NotFound();
+                return BadRequest();
             }
             TblUser = tbluser;
             ViewData["DistrictName"] = new SelectList(_districtService.GetDistricts(), "DistrictId", "DistrictName");
