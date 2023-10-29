@@ -13,6 +13,7 @@ namespace BirdFarmShop.Pages.Manager.BirdManagement
     public class IndexModel : PageModel
     {
         private readonly IBirdService _birdService;
+        private string isManager;
 
         public IndexModel(IBirdService birdService)
         {
@@ -21,11 +22,27 @@ namespace BirdFarmShop.Pages.Manager.BirdManagement
 
         public IList<Bird> Bird { get;set; } = default!;
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            
-                Bird = _birdService.GetAllBirds();
-                
+            try
+            {
+                isManager = HttpContext.Session.GetString("isManager")!;
+                if (isManager != "MN")
+                {
+                    return NotFound();
+                }
+                if (isManager == null)
+                {
+                    return NotFound();
+                }
+            }
+            catch
+            {
+                NotFound();
+            }
+
+            Bird = _birdService.GetAllBirds();
+            return Page();
         }
     }
 }

@@ -14,6 +14,7 @@ namespace BirdFarmShop.Pages.Admin.BirdManagement
     {
         private readonly IUserService _userService;
         private readonly IBirdService _birdService;
+        private string isAdmin;
 
         public CreateModel(IUserService userService, IBirdService birdService)
         {
@@ -23,7 +24,23 @@ namespace BirdFarmShop.Pages.Admin.BirdManagement
 
         public IActionResult OnGet()
         {
-        ViewData["UserId"] = new SelectList(_userService.GetAllUsers(), "UserId", "FullName");
+            try
+            {
+                isAdmin = HttpContext.Session.GetString("isAdmin")!;
+                if (isAdmin != "AD")
+                {
+                    return NotFound();
+                }
+                if (isAdmin == null)
+                {
+                    return NotFound();
+                }
+            }
+            catch
+            {
+                NotFound();
+            }
+            ViewData["UserId"] = new SelectList(_userService.GetAllUsers(), "UserId", "FullName");
             return Page();
         }
 

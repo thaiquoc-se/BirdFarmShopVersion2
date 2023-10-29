@@ -8,19 +8,19 @@ using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
 using Services.IServices;
 
-namespace BirdFarmShop.Pages.Admin.BirdManagement
+namespace BirdFarmShop.Pages.Admin.OrderManagement
 {
     public class IndexModel : PageModel
     {
-        private readonly IBirdService _birdService;
+        private readonly IOrderService _orderService;
         private string isAdmin;
 
-        public IndexModel(IBirdService birdService)
+        public IndexModel(IOrderService orderService)
         {
-            _birdService = birdService;
+            _orderService = orderService;
         }
 
-        public IList<Bird> Bird { get;set; } = default!;
+        public IList<TblOrder> TblOrder { get;set; } = default!;
 
         public IActionResult OnGet()
         {
@@ -40,8 +40,7 @@ namespace BirdFarmShop.Pages.Admin.BirdManagement
             {
                 NotFound();
             }
-
-            Bird = _birdService.GetAllBirds();
+            TblOrder = _orderService.GetAllOrders();
             return Page();
         }
     }

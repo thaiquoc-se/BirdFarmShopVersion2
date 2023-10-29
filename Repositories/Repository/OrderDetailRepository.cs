@@ -13,7 +13,7 @@ namespace Repositories.Repository
     {
         public void AddNewOrderDetail(TblOrderDetail orderDetail) => OrderDetailDAO.Instance.AddNewOrderDetail(orderDetail);
         
-        public TblOrderDetail GetOrderDetailByID(int id) => OrderDetailDAO.Instance.GetOrderDetailByID(id);
+        public List<TblOrderDetail> GetOrderDetailByID(int id) => OrderDetailDAO.Instance.GetOrderDetailByID(id);
         
     }
 }

@@ -9,7 +9,7 @@ namespace Repositories.IRepository
 {
     public interface IOrderDetailRepository
     {
-        TblOrderDetail GetOrderDetailByID(int id);
+        List<TblOrderDetail> GetOrderDetailByID(int id);
 
         void AddNewOrderDetail(TblOrderDetail orderDetail);
     }

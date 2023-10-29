@@ -1,0 +1,82 @@
+﻿@page
+@model BirdFarmShop.Pages.Admin.OrderManagement.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TblOrder[0].OrderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblOrder[0].ReasonContent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblOrder[0].TypeOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblOrder[0].OrderStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblOrder[0].StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblOrder[0].EndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblOrder[0].ShipAddress)
+            </th>
+            <th>
+                Customer Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TblOrder) {
+        <tr>
+             <td>
+                @Html.DisplayFor(modelItem => item.OrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReasonContent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShipAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FullName)
+            </td>
+            <td>
+                    @if (item.OrderStatus == "Cancel")
+                    {
+                        <a asp-page="./Details" asp-route-id="@item.OrderId">Details</a>
+                    }
+                    else
+                    {
+                        <a asp-page="./Details" asp-route-id="@item.OrderId">Details</a>
+                        <a asp-page="./Cancel" asp-route-id="@item.OrderId">Cancel</a>
+                    }
+                    
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

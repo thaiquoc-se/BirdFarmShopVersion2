@@ -15,6 +15,7 @@ namespace BirdFarmShop.Pages.Manager.BirdManagement
     {
         private readonly IUserService _userService;
         private readonly IBirdService _birdService;
+        private string isManager;
 
         public EditModel(IUserService userService, IBirdService birdService)
         {
@@ -27,7 +28,22 @@ namespace BirdFarmShop.Pages.Manager.BirdManagement
 
         public IActionResult OnGet(int? id)
         {
-
+            try
+            {
+                isManager = HttpContext.Session.GetString("isManager")!;
+                if (isManager != "MN")
+                {
+                    return NotFound();
+                }
+                if (isManager == null)
+                {
+                    return NotFound();
+                }
+            }
+            catch
+            {
+                NotFound();
+            }
             var bird = _birdService.GetBirdByID(id.Value);
             if (bird == null)
             {

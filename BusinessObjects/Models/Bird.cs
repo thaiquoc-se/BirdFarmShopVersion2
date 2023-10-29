@@ -21,14 +21,17 @@ namespace BusinessObjects.Models
         [Required]
         public string? Gender { get; set; }
         [Required]
+        [Range(0, double.MaxValue, ErrorMessage = "WeightofBirds must be greater than 0.")]
         public string? WeightofBirds { get; set; }
         [Required]
         public string? BirdDescription { get; set; }
         [Required]
         public bool? BirdStatus { get; set; }
         [Required]
+        [Range(0, double.MaxValue, ErrorMessage = "Price must be greater than 0.")]
         public decimal Price { get; set; }
         [Required]
+        [Range(0, int.MaxValue, ErrorMessage = "Quantity must be greater than 0.")]
         public int? Quantity { get; set; }
 
         public virtual TblUser User { get; set; } = null!;

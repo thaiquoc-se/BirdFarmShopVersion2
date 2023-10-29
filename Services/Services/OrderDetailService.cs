@@ -19,7 +19,7 @@ namespace Services.Services
         public void AddNewOrderDetail(TblOrderDetail orderDetail) => _orderDetailRepository.AddNewOrderDetail(orderDetail);
         
 
-        public TblOrderDetail GetOrderDetailByID(int id) => _orderDetailRepository.GetOrderDetailByID(id);
+        public List<TblOrderDetail> GetOrderDetailByID(int id) => _orderDetailRepository.GetOrderDetailByID(id);
         
     }
 }

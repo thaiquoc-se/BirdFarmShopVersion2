@@ -36,13 +36,13 @@ namespace DataAccessObjects
             }
         }
 
-        public TblOrderDetail GetOrderDetailByID(int id)
+        public List<TblOrderDetail> GetOrderDetailByID(int id)
         {
             try
             {
                 return _context.TblOrderDetails
                 .Include(t => t.Bird)
-                .Include(t => t.Order).Where(t => t.OrderId == id).FirstOrDefault()!;
+                .Include(t => t.Order).Where(t => t.OrderId == id).ToList();
             }
             catch (Exception ex)
             {

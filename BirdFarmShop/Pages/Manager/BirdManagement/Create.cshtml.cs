@@ -14,6 +14,7 @@ namespace BirdFarmShop.Pages.Manager.BirdManagement
     {
         private readonly IUserService _userService;
         private readonly IBirdService _birdService;
+        private string isManager;
 
         public CreateModel(IUserService userService, IBirdService birdService)
         {
@@ -23,7 +24,23 @@ namespace BirdFarmShop.Pages.Manager.BirdManagement
 
         public IActionResult OnGet()
         {
-        ViewData["UserId"] = new SelectList(_userService.GetAllUsers(), "UserId", "FullName");
+            try
+            {
+                isManager = HttpContext.Session.GetString("isManager")!;
+                if (isManager != "MN")
+                {
+                    return NotFound();
+                }
+                if (isManager == null)
+                {
+                    return NotFound();
+                }
+            }
+            catch
+            {
+                NotFound();
+            }
+            ViewData["UserId"] = new SelectList(_userService.GetAllUsers(), "UserId", "FullName");
             return Page();
         }
 
@@ -34,6 +51,7 @@ namespace BirdFarmShop.Pages.Manager.BirdManagement
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public IActionResult OnPost()
         {
+
             try
             {
                 _birdService.AddNew(Bird);

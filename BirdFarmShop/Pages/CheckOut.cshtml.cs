@@ -83,7 +83,7 @@ namespace BirdFarmShop.Pages
                     OrderId = order.OrderId,
                     BirdId = item.bird.BirdId,
                     Quantity = item.Quantity,
-                    TotalPrice = Total,
+                    TotalPrice = item.Quantity * item.bird.Price,
                     CostsIncurred = ""
                 };
                 var checkQuantity = _birdService.GetBirdByID(item.bird.BirdId);

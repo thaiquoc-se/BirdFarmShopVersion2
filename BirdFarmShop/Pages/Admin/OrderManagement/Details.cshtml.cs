@@ -8,47 +8,47 @@ using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
 using Services.IServices;
 
-namespace BirdFarmShop.Pages.Manager.BirdManagement
+namespace BirdFarmShop.Pages.Admin.OrderManagement
 {
     public class DetailsModel : PageModel
     {
-        private readonly IBirdService _birdService;
-        private string isManager;
+        private readonly IOrderDetailService _orderDetailService;
+        private string isAdmin;
 
-        public DetailsModel(IBirdService birdService)
+        public DetailsModel(IOrderDetailService orderDetailService)
         {
-            _birdService = birdService;
+            _orderDetailService = orderDetailService;
         }
 
-      public Bird Bird { get; set; } = default!; 
+      public List<TblOrderDetail> TblOrder { get; set; } = default!; 
 
         public IActionResult OnGet(int? id)
         {
             try
             {
-                isManager = HttpContext.Session.GetString("isManager")!;
-                if (isManager != "MN")
+                isAdmin = HttpContext.Session.GetString("isAdmin")!;
+                if (isAdmin != "AD")
                 {
                     return NotFound();
                 }
-                if (isManager == null)
+                if (isAdmin == null)
                 {
                     return NotFound();
                 }
             }
             catch
             {
-                NotFound();
+                return NotFound();
             }
 
-            var bird = _birdService.GetBirdByID(id.Value);
-            if (bird == null)
+            var tblorder = _orderDetailService.GetOrderDetailByID(id.Value);
+            if (tblorder == null)
             {
                 return NotFound();
             }
             else 
             {
-                Bird = bird;
+                TblOrder = tblorder;
             }
             return Page();
         }

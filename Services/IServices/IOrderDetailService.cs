@@ -9,7 +9,7 @@ namespace Services.IServices
 {
     public interface IOrderDetailService
     {
-        TblOrderDetail GetOrderDetailByID(int id);
+        List<TblOrderDetail> GetOrderDetailByID(int id);
 
         void AddNewOrderDetail(TblOrderDetail orderDetail);
     }

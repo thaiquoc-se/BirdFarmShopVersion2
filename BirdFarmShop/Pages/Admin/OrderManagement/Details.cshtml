@@ -1,0 +1,75 @@
+﻿@page
+@model BirdFarmShop.Pages.Admin.OrderManagement.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th>
+                Bird
+            </th>
+            <th>
+                Bird Price
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Sub Total
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                End Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TblOrder)
+        {
+            <tr>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bird.BirdName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bird.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.EndDate)
+                </td>
+               
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4"></td>
+            <td>
+                Total Price:
+            </td>
+            <td>
+                @Model.TblOrder.Sum(item => item.TotalPrice)
+            </td>
+            <td colspan="2"></td>
+        </tr>
+    </tfoot>
+</table>

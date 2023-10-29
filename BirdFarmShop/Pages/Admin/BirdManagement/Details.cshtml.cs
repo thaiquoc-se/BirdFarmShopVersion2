@@ -13,6 +13,7 @@ namespace BirdFarmShop.Pages.Admin.BirdManagement
     public class DetailsModel : PageModel
     {
         private readonly IBirdService _birdService;
+        private string isAdmin;
 
         public DetailsModel(IBirdService birdService)
         {
@@ -23,6 +24,22 @@ namespace BirdFarmShop.Pages.Admin.BirdManagement
 
         public IActionResult OnGet(int? id)
         {
+            try
+            {
+                isAdmin = HttpContext.Session.GetString("isAdmin")!;
+                if (isAdmin != "AD")
+                {
+                    return NotFound();
+                }
+                if (isAdmin == null)
+                {
+                    return NotFound();
+                }
+            }
+            catch
+            {
+                NotFound();
+            }
 
             var bird = _birdService.GetBirdByID(id.Value);
             if (bird == null)

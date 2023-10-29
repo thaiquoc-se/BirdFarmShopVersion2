@@ -40,8 +40,16 @@ namespace BirdFarmShop.Pages
                 ErrorMessage = "Password and Confirm Password do not match.";
                 return Page();
             }
+            
             if(!string.IsNullOrWhiteSpace(TblUser.UserName) && !string.IsNullOrWhiteSpace(TblUser.Pass))
             {
+                var checkUserName = _userService.GetAllUsers().Where(u => u.UserName.Equals(TblUser.UserName)).FirstOrDefault();
+
+                if (checkUserName != null)
+                {
+                    ErrorMessage = "UserName Existed";
+                    return Page();
+                }
                 var user = new TblUser()
                 {
                     UserName = TblUser.UserName,
