@@ -33,6 +33,8 @@ namespace BirdFarmShop.Pages
         public decimal Total { get; set; }
 
         public int UserId;
+        public string errorQuantity;
+
         public IActionResult OnGet()
         {
             try
@@ -95,11 +97,13 @@ namespace BirdFarmShop.Pages
                 }
                 else
                 {
+                    errorQuantity = "This Bird is out of Stock";
                     return Page();
                 }
                 _orderDetailService.AddNewOrderDetail(orderDetail);
             }
             HttpContext.Session.Remove("cart");
+
             return RedirectToPage("ShowAllBirds");
         }
     }

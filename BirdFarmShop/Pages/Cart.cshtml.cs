@@ -78,12 +78,20 @@ namespace BirdFarmShop.Pages
         public IActionResult OnPostUpdate(int[] quantities)
         {
             cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
-            for (var i = 0; i < cart.Count; i++)
+            try
             {
-                cart[i].Quantity = quantities[i];
+                for (var i = 0; i < cart.Count; i++)
+                {
+                    cart[i].Quantity = quantities[i];
+                }
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+                return RedirectToPage("Cart");
             }
-            SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
-            return RedirectToPage("Cart");
+            catch
+            {
+                return RedirectToPage("Cart");
+            }
+            
         }
 
         private int Exists(List<Item> cart, int id)

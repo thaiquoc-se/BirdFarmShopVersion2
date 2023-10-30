@@ -41,6 +41,7 @@
             <th>Price</th>
             <th>Quantity <input type="submit" value="Update" /></th>
             <th>Sub Total</th>
+
         </tr>
         @foreach (var item in Model.cart)
         {
@@ -52,7 +53,11 @@
                 <td>@item.bird.BirdName</td>
                 <td><img src="~/img/chim1.png" width="120" height="100" /></td>
                 <td>@item.bird.Price VNĐ</td>
-                <td><input type="number" name="quantities" value="@item.Quantity" min="1" style="width: 50px;" /></td>
+                <td>
+                    <input type="number" name="quantities" value="@item.Quantity" min="1" style="width: 50px;" />
+                    <span class="text-danger" style="color:red">@Model.errorQuantity</span>
+                </td>
+                
                 <td>
                     @(item.bird.Price * item.Quantity) VNĐ
                 </td>

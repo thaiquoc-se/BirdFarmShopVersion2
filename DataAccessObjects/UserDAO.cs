@@ -151,6 +151,7 @@ namespace DataAccessObjects
                         _user.Pass = user.Pass;
                         _user.UserStatus = user.UserStatus;
                         _user.Image = user.Image;
+                        _user.Phone = user.Phone;
                         _context.Update(_user);
                         _context.SaveChanges();
                     }                  
