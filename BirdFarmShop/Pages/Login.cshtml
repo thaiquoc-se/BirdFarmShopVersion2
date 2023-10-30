@@ -33,6 +33,7 @@
                     <span asp-validation-for="user.Pass" class="text-danger"></span>
                     <label>Password</label>
                 </div>
+                <h6 class="text-danger" style="color:red">@Model.ErrorMessage</h6>
                 <div class="remeber-forgot">
                     <label>
                         <input type="checkbox">Remember me

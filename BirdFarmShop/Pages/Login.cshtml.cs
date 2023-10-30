@@ -23,41 +23,51 @@ namespace BirdFarmShop.Pages
 
         [BindProperty]
         public TblUser user { get; set; } = default!;
-        
+        public string ErrorMessage { get; private set; }
 
-      
         public IActionResult OnPost()
         {
             
             if(!string.IsNullOrWhiteSpace(user.UserName) && !string.IsNullOrWhiteSpace(user.Pass))
             {
-                var check = _userService.checkLogin(user.UserName,user.Pass);
-                if(check != null)
+                try
                 {
-                    if (check.RoleId.Equals("US"))
+                    var check = _userService.checkLogin(user.UserName, user.Pass);
+                    if (check != null)
                     {
-                        HttpContext.Session.SetInt32("UserID", check.UserId);
-                        return RedirectToPage("HomePage");
+                        if (check.RoleId.Equals("US"))
+                        {
+                            HttpContext.Session.SetInt32("UserID", check.UserId);
+                            return RedirectToPage("HomePage");
+                        }
+                        if (check.RoleId.Equals("AD"))
+                        {
+                            HttpContext.Session.SetInt32("UserID", check.UserId);
+                            HttpContext.Session.SetString("isAdmin", check.RoleId);
+                            return RedirectToPage("Admin/UserManagement/ShowUserList");
+                        }
+                        if (check.RoleId.Equals("MN"))
+                        {
+                            HttpContext.Session.SetInt32("UserID", check.UserId);
+                            HttpContext.Session.SetString("isManager", check.RoleId);
+                            return RedirectToPage("Manager/StaffManagement/Index");
+                        }
+                        if (check.RoleId.Equals("ST"))
+                        {
+                            HttpContext.Session.SetInt32("UserID", check.UserId);
+                            HttpContext.Session.SetString("isStaff", check.RoleId);
+                            return RedirectToPage("Staff/BirdManagement/Index");
+                        }
                     }
-                    if (check.RoleId.Equals("AD"))
-                    {
-                        HttpContext.Session.SetInt32("UserID", check.UserId);
-                        HttpContext.Session.SetString("isAdmin",check.RoleId);
-                        return RedirectToPage("Admin/UserManagement/ShowUserList");
-                    }
-                    if (check.RoleId.Equals("MN"))
-                    {
-                        HttpContext.Session.SetInt32("UserID", check.UserId);
-                        HttpContext.Session.SetString("isManager", check.RoleId);
-                        return RedirectToPage("Manager/StaffManagement/Index");
-                    }
-                    if (check.RoleId.Equals("ST"))
-                    {
-                        HttpContext.Session.SetInt32("UserID", check.UserId);
-                        HttpContext.Session.SetString("isStaff", check.RoleId);
-                        return RedirectToPage("Staff/BirdManagement/Index");
-                    }
+                    ErrorMessage = "Incorect User Name or Password Please Try Again";
+                    return Page();
                 }
+                catch
+                {
+                    ErrorMessage = "Incorect User Name or Password Please Try Again";
+                    return Page();
+                }
+               
                 
             }
 
