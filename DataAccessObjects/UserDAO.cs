@@ -152,6 +152,7 @@ namespace DataAccessObjects
                         _user.UserStatus = user.UserStatus;
                         _user.Image = user.Image;
                         _user.Phone = user.Phone;
+                        _user.Image = user.Image;
                         _context.Update(_user);
                         _context.SaveChanges();
                     }                  

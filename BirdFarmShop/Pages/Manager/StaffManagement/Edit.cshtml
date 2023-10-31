@@ -99,89 +99,95 @@
 
         <section class="box">
             <div class="container">
-                <div class="profile">
-                    <div class="profile__left">
-                        <img src="@Html.DisplayFor(model => model.TblUser.Image)" width="150" alt="...">
-                        <div class="upload">
-                            <button class="btn btn-Warning" type="button" name="button">
-                                <i class="fa fa-upload"></i> Upload avatar
-                                <input asp-for="TblUser.Image" type="file" name="" id="">
-                            </button>
+                <form method="post">
+                    <div class="profile">
+                        <div class="profile__left">
+                            <img src="@Html.DisplayFor(model => model.TblUser.Image)" width="150" alt="...">
+                            <div class="upload">
+                                <button class="btn btn-Warning" type="button" name="button">
+                                    <i class="fa fa-upload"></i> Upload avatar
+                                    <input asp-for="TblUser.Image">
+                                </button>
+                            </div>
+                        </div>
+                        <input type="hidden" asp-for="TblUser.UserId" />
+                        <div class="profile__right">
+                            <h3>Edit</h3>
+                            <div class="info_data">
+                                <div class="info_data-left">
+
+                                    <div class="info">
+                                        <h5>UserName:</h5>
+
+                                        <input asp-for="TblUser.UserName" class="form-control w-60 mb-3" />
+                                        <span asp-validation-for="TblUser.UserName" class="text-danger"></span>
+                                        <span class="text-danger">@Model.ErrorMessage</span>
+                                    </div>
+                                    <div class="info">
+                                        <h5>password:</h5>
+
+                                        <input asp-for="TblUser.Pass" class="form-control w-60 mb-3" />
+                                        <span asp-validation-for="TblUser.Pass" class="text-danger"></span>
+                                    </div>
+                                    <div class="info">
+                                        <h5>Email:</h5>
+
+                                        <input asp-for="TblUser.Email" class="form-control w-60 mb-3" />
+                                        <span asp-validation-for="TblUser.Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="info">
+                                        <h5>FullName:</h5>
+
+                                        <input asp-for="TblUser.FullName" class="form-control w-60 mb-3" />
+                                        <span asp-validation-for="TblUser.FullName" class="text-danger"></span>
+                                    </div>
+                                    <div class="info">
+                                        <h5>Phone:</h5>
+
+                                        <input asp-for="TblUser.Phone" class="form-control w-60 mb-3" />
+                                        <span asp-validation-for="TblUser.Phone" class="text-danger"></span>
+                                    </div>
+                                    <div class="info">
+                                        <h5>Address:</h5>
+
+                                        <input asp-for="TblUser.UserAddress" class="form-control w-60 mb-3" />
+                                        <span asp-validation-for="TblUser.UserAddress" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="info_data-right">
+
+
+                                    <div class="info">
+                                        <h5>WardId:</h5>
+
+                                        <select asp-for="TblUser.WardId" class="form-select form-select-lg" asp-items="ViewBag.WardName"></select>
+                                        <span asp-validation-for="TblUser.WardId" class="text-danger"></span>
+                                    </div>
+                                    <div class="info">
+                                        <h5>DistrictId:</h5>
+
+                                        <select asp-for="TblUser.DistrictId" class="form-select form-select-lg" asp-items="ViewBag.DistrictName"></select>
+                                        <span asp-validation-for="TblUser.DistrictId" class="text-danger"></span>
+                                    </div>
+                                    <div class="info">
+                                        <h5>Status:</h5>
+
+                                        <input asp-for="TblUser.UserStatus" class="form-control" />
+                                        <span asp-validation-for="TblUser.UserStatus" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="button">
+                                <button type="submit" value="Save" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i>Chỉnh sửa</button>
+                                
+                            </div>
+
                         </div>
                     </div>
 
-                    <div class="profile__right">
-                        <h3>Edit</h3>
-                        <div class="info_data">
-                            <div class="info_data-left">
-
-                                <div class="info">
-                                    <h5>UserName:</h5>
-
-                                    <input asp-for="TblUser.UserName" class="form-control w-60 mb-3" />
-                                    <span asp-validation-for="TblUser.UserName" class="text-danger"></span>
-                                </div>
-                                <div class="info">
-                                    <h5>password:</h5>
-
-                                    <input asp-for="TblUser.Pass" class="form-control w-60 mb-3" />
-                                    <span asp-validation-for="TblUser.Pass" class="text-danger"></span>
-                                </div>
-                                <div class="info">
-                                    <h5>Email:</h5>
-
-                                    <input asp-for="TblUser.Email" class="form-control w-60 mb-3" />
-                                    <span asp-validation-for="TblUser.Email" class="text-danger"></span>
-                                </div>
-                                <div class="info">
-                                    <h5>FullName:</h5>
-
-                                    <input asp-for="TblUser.FullName" class="form-control w-60 mb-3" />
-                                    <span asp-validation-for="TblUser.FullName" class="text-danger"></span>
-                                </div>
-                                <div class="info">
-                                    <h5>Phone:</h5>
-
-                                    <input asp-for="TblUser.Phone" class="form-control w-60 mb-3" />
-                                    <span asp-validation-for="TblUser.Phone" class="text-danger"></span>
-                                </div>
-                                <div class="info">
-                                    <h5>Address:</h5>
-
-                                    <input asp-for="TblUser.UserAddress" class="form-control w-60 mb-3" />
-                                    <span asp-validation-for="TblUser.UserAddress" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="info_data-right">
-
-
-                                <div class="info">
-                                    <h5>WardId:</h5>
-
-                                    <select asp-for="TblUser.WardId" class="form-select form-select-lg" asp-items="ViewBag.WardName"></select>
-                                    <span asp-validation-for="TblUser.WardId" class="text-danger"></span>
-                                </div>
-                                <div class="info">
-                                    <h5>DistrictId:</h5>
-
-                                    <select asp-for="TblUser.DistrictId" class="form-select form-select-lg" asp-items="ViewBag.DistrictName"></select>
-                                    <span asp-validation-for="TblUser.DistrictId" class="text-danger"></span>
-                                </div>
-                                <div class="info">
-                                    <h5>Status:</h5>
-
-                                    <input asp-for="TblUser.UserStatus" class="form-control" />
-                                    <span asp-validation-for="TblUser.UserStatus" class="text-danger"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="button">
-                            <button type="submit" value="Save" class="btn btn-success"><i class="fa-regular fa-pen-to-square"></i>Chỉnh sửa</button>
-                            <a asp-page="./Index"><button class="btn btn-primary"><i class="fa-solid fa-backward"></i>Quay về</button></a>
-                        </div>
-
-                    </div>
-                </div>
+                </form>
+                <a asp-page="./Index"><button class="btn btn-primary back"><i class="fa-solid fa-backward"></i>Quay về</button></a>
+                
             </div>
         </section>
 

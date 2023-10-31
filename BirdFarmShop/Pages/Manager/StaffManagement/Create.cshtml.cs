@@ -20,9 +20,9 @@ namespace BirdFarmShop.Pages.Manager.StaffManagement
 
         public IActionResult OnGet()
         {
-        ViewData["DistrictId"] = new SelectList(_context.TblDistricts, "DistrictId", "DistrictId");
+        ViewData["DistrictName"] = new SelectList(_context.TblDistricts, "DistrictId", "DistrictName");
         ViewData["RoleId"] = new SelectList(_context.TblRoles, "RoleId", "RoleId");
-        ViewData["WardId"] = new SelectList(_context.TblWards, "WardId", "WardId");
+        ViewData["WardName"] = new SelectList(_context.TblWards, "WardId", "WardName");
             return Page();
         }
 

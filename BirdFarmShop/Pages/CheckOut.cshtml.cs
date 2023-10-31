@@ -31,6 +31,7 @@ namespace BirdFarmShop.Pages
         public UserDTO TblUser { get; set; } = default!;
         public List<Item> cart { get; set; }
         public decimal Total { get; set; }
+        public string Msg { get; private set; }
 
         public int UserId;
         public string errorQuantity;
@@ -43,7 +44,9 @@ namespace BirdFarmShop.Pages
             }
             catch
             {
-                return RedirectToPage("Login");
+                Msg = "You must be login to continute this action";
+                cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+                return Page();
             }
             var tbluser = _userService.GetUserDTOById(UserId);
             if (tbluser == null)

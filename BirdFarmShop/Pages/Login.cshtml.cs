@@ -37,6 +37,20 @@ namespace BirdFarmShop.Pages
                     {
                         if (check.RoleId.Equals("US"))
                         {
+                            try
+                            {
+                                var cart = HttpContext.Session.GetString("cart");
+                                if (cart != null)
+                                {
+                                    HttpContext.Session.SetInt32("UserID", check.UserId);
+                                    return RedirectToPage("Cart");
+                                }
+                            }
+                            catch
+                            {
+                                HttpContext.Session.SetInt32("UserID", check.UserId);
+                                return RedirectToPage("HomePage");
+                            }
                             HttpContext.Session.SetInt32("UserID", check.UserId);
                             return RedirectToPage("HomePage");
                         }

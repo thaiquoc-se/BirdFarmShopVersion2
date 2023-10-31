@@ -87,3 +87,8 @@ hr .new1 {
 .date {
     background-color: #ccc
 }
+.back {
+    position: relative;
+    left: -4px;
+    top: 5px;
+}

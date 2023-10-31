@@ -23,7 +23,7 @@ namespace BirdFarmShop.Pages.Manager.StaffManagement
         public UserDTO TblUser { get; set; } = default!;
         public string isManager;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public  IActionResult OnGet(int? id)
         {
             try
             {

@@ -25,6 +25,8 @@ namespace BirdFarmShop.Pages.Manager.StaffManagement
 
         [BindProperty]
         public TblUser TblUser { get; set; } = default!;
+        public string ErrorMessage { get; private set; }
+
         public string isManager;
         public IActionResult OnGet(int? id)
         {
@@ -60,6 +62,13 @@ namespace BirdFarmShop.Pages.Manager.StaffManagement
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public IActionResult OnPost()
         {
+            var check = _userService.GetAllUsers().Where(x => x.UserName == TblUser.UserName).FirstOrDefault();
+            if (check != null)
+            {
+                ErrorMessage = "User Existed";
+                OnGet(TblUser.UserId);
+                return Page();
+            }
             _userService.Update(TblUser);
             return RedirectToPage("./Index");
         }
