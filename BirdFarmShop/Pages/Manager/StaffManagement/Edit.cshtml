@@ -117,14 +117,11 @@
                                 <div class="info_data-left">
 
                                     <div class="info">
-                                        <h5>UserName:</h5>
-
-                                        <input asp-for="TblUser.UserName" class="form-control w-60 mb-3" />
+                                        <input asp-for="TblUser.UserName" class="form-control w-60 mb-3" type="hidden" />
                                         <span asp-validation-for="TblUser.UserName" class="text-danger"></span>
-                                        <span class="text-danger">@Model.ErrorMessage</span>
                                     </div>
                                     <div class="info">
-                                        <h5>password:</h5>
+                                        <h5>Password:</h5>
 
                                         <input asp-for="TblUser.Pass" class="form-control w-60 mb-3" />
                                         <span asp-validation-for="TblUser.Pass" class="text-danger"></span>
@@ -170,9 +167,8 @@
                                         <span asp-validation-for="TblUser.DistrictId" class="text-danger"></span>
                                     </div>
                                     <div class="info">
-                                        <h5>Status:</h5>
 
-                                        <input asp-for="TblUser.UserStatus" class="form-control" />
+                                        <input asp-for="TblUser.UserStatus" class="form-control" type="hidden" />
                                         <span asp-validation-for="TblUser.UserStatus" class="text-danger"></span>
                                     </div>
                                 </div>

@@ -20,6 +20,7 @@ namespace BusinessObjects.Models
 
         [Required(ErrorMessage ="Please input User Name")]
         public string? UserName { get; set; }
+
         [Required(ErrorMessage = "Please input Password")]
         public string? Pass { get; set; }
         public string? FullName { get; set; }

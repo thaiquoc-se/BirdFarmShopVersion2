@@ -6,33 +6,49 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Services.IServices;
+using Services.UnitOfWork;
 
 namespace BirdFarmShop.Pages.Admin.UserManagement
 {
     public class DeleteModel : PageModel
     {
-        private readonly BusinessObjects.Models.BirdFarmShopContext _context;
+        private readonly IUserService _userService;
+        private readonly IUnitOfWork _unitOfWork;
+        public string isAdmin;
 
-        public DeleteModel(BusinessObjects.Models.BirdFarmShopContext context)
+        public DeleteModel(IUserService userService, IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _userService = userService;
+            _unitOfWork = unitOfWork;
         }
 
         [BindProperty]
       public TblUser TblUser { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int? id)
         {
-            if (id == null || _context.TblUsers == null)
+            try
             {
-                return NotFound();
+                isAdmin = HttpContext.Session.GetString("isAdmin")!;
+                if (isAdmin != "AD")
+                {
+                    return NotFound();
+                }
+                if (isAdmin == null)
+                {
+                    return NotFound();
+                }
             }
-
-            var tbluser = await _context.TblUsers.FirstOrDefaultAsync(m => m.UserId == id);
-
-            if (tbluser == null)
+            catch
             {
-                return NotFound();
+                NotFound();
+            }
+            var tbluser = _userService.GetUserByID(id.Value);
+
+            if (tbluser.RoleId == "AD")
+            {
+                return BadRequest();
             }
             else 
             {
@@ -41,22 +57,25 @@ namespace BirdFarmShop.Pages.Admin.UserManagement
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public IActionResult OnPost(int? id)
         {
-            if (id == null || _context.TblUsers == null)
-            {
-                return NotFound();
-            }
-            var tbluser = await _context.TblUsers.FindAsync(id);
 
-            if (tbluser != null)
+            var tbluser = _userService.GetUserByID(id.Value);
+            try
             {
-                TblUser = tbluser;
-                _context.TblUsers.Remove(TblUser);
-                await _context.SaveChangesAsync();
+                if(tbluser != null)
+                {
+                     tbluser.UserStatus = false;
+                    _unitOfWork.Update(tbluser);
+                    _unitOfWork.SaveChanges();
+                    return RedirectToPage("./ShowUserList");
+                }
+                return Page();
             }
-
-            return RedirectToPage("./ShowUserList");
+            catch
+            {
+                return BadRequest();
+            }
         }
     }
 }

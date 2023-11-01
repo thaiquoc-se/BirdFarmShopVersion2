@@ -105,12 +105,12 @@
                             <div class="info_data-left">
 
                                 <div class="info">
-                                    <h5>UserName:</h5>
+                                    <h5>User Name:</h5>
                                     <input asp-for="TblUser.UserName" type="text" class="form-control w-60 mb-3">
                                     <span asp-validation-for="TblUser.UserName" class="text-danger"></span>
                                 </div>
                                 <div class="info">
-                                    <h5>password:</h5>
+                                    <h5>Password:</h5>
                                     <input asp-for="TblUser.Pass" type="password" class="form-control w-60 mb-3">
                                     <span asp-validation-for="TblUser.UserName" class="text-danger"></span>
                                 </div>
@@ -120,17 +120,17 @@
                                     <span asp-validation-for="TblUser.Email" class="text-danger"></span>
                                 </div>
                                 <div class="info">
-                                    <h5>Họ và tên:</h5>
+                                    <h5>Full Name:</h5>
                                     <input asp-for="TblUser.FullName" type="text" class="form-control w-60 mb-3">
                                     <span asp-validation-for="TblUser.FullName" class="text-danger"></span>
                                 </div>
                                 <div class="info">
-                                    <h5>số điện thoại:</h5>
+                                    <h5>Phone:</h5>
                                     <input asp-for="TblUser.Phone" type="text" class="form-control w-60 mb-3">
                                     <span asp-validation-for="TblUser.Phone" class="text-danger"></span>
                                 </div>
                                 <div class="info">
-                                    <h5>địa chỉ:</h5>
+                                    <h5>Address:</h5>
                                     <input asp-for="TblUser.UserAddress" type="text" class="form-control w-60 mb-3">
                                     <span asp-validation-for="TblUser.UserAddress" class="text-danger"></span>
                                 </div>
@@ -139,11 +139,11 @@
 
 
                                 <div class="info">
-                                    <h5>WardId:</h5>
+                                    <h5>Ward:</h5>
                                     <select asp-for="TblUser.WardId" class="form-control" asp-items="ViewBag.WardName"></select>
                                 </div>
                                 <div class="info">
-                                    <h5>DistrictId:</h5>
+                                    <h5>District:</h5>
                                     <select asp-for="TblUser.DistrictId" class="form-control" asp-items="ViewBag.DistrictName"></select>
                                 </div>
                                 <div class="info">

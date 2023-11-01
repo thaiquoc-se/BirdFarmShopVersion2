@@ -61,14 +61,7 @@ namespace BirdFarmShop.Pages.Manager.StaffManagement
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public IActionResult OnPost()
-        {
-            var check = _userService.GetAllUsers().Where(x => x.UserName == TblUser.UserName).FirstOrDefault();
-            if (check != null)
-            {
-                ErrorMessage = "User Existed";
-                OnGet(TblUser.UserId);
-                return Page();
-            }
+        {          
             _userService.Update(TblUser);
             return RedirectToPage("./Index");
         }

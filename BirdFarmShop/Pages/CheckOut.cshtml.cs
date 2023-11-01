@@ -32,7 +32,7 @@ namespace BirdFarmShop.Pages
         public List<Item> cart { get; set; }
         public decimal Total { get; set; }
         public string Msg { get; private set; }
-
+        public string EmptyMsg { get; private set; }
         public int UserId;
         public string errorQuantity;
 
@@ -67,6 +67,11 @@ namespace BirdFarmShop.Pages
                 return RedirectToPage("Login");
             }
             cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+            if(cart.Count <= 0)
+            {
+                EmptyMsg = "You do not have any Bird in your Cart";
+                return Page();
+            }
             Total = cart.Sum(i => i.bird.Price * i.Quantity);
 
             var order = new TblOrder()

@@ -35,6 +35,11 @@ namespace BirdFarmShop.Pages
                     var check = _userService.checkLogin(user.UserName, user.Pass);
                     if (check != null)
                     {
+                        if(check.UserStatus != true)
+                        {
+                            ErrorMessage = "You are not allowed access into system";
+                            return Page();
+                        }
                         if (check.RoleId.Equals("US"))
                         {
                             try
@@ -81,10 +86,7 @@ namespace BirdFarmShop.Pages
                     ErrorMessage = "Incorect User Name or Password Please Try Again";
                     return Page();
                 }
-               
-                
             }
-
             return Page();
         }
     }
