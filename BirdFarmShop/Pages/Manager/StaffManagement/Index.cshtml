@@ -30,13 +30,13 @@
             <div class="side-menu">
                 <ul>
                     <li>
-                        <a href="" class="active">
+                        <a asp-page="/Manager/StaffManagement/Index" class="active">
                             <span><i class="fa-solid fa-user-tie"></i></span>
                             <small>Staff</small>
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a asp-page="/Manager/BirdManagement/Index">
                             <span><i class="fa-solid fa-kiwi-bird"></i></span>
                             <small>Bird</small>
                         </a>
@@ -54,7 +54,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="">
+                        <a asp-page="/Manager/OrderManagement/Index">
                             <span class="las la-shopping-cart"></span>
                             <small>Orders</small>
                         </a>
@@ -80,19 +80,6 @@
                 </label>
 
                 <div class="header-menu">
-                    <label for="">
-                        <span class="las la-search"></span>
-                    </label>
-
-                    <div class="notify-icon">
-                        <span class="las la-envelope"></span>
-                        <span class="notify">4</span>
-                    </div>
-
-                    <div class="notify-icon">
-                        <span class="las la-bell"></span>
-                        <span class="notify">3</span>
-                    </div>
 
                     <div class="user">
                         <div class="bg-img" style="background-image: url(img/1.jpeg)"></div>
@@ -118,7 +105,7 @@
 
                     <div class="record-header">
                         
-                        <a asp-page="Create"><button class="btn btn-primary">Create</button></a>
+                        
                         <div class="browse">
                             <input type="search" placeholder="Search" class="record-search">
                             

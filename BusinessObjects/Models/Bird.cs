@@ -34,6 +34,8 @@ namespace BusinessObjects.Models
         [Range(0, int.MaxValue, ErrorMessage = "Quantity must be greater than 0.")]
         public int? Quantity { get; set; }
 
+        public string? Image {  get; set; }
+
         public virtual TblUser User { get; set; } = null!;
         public virtual ICollection<TblComment> TblComments { get; set; }
         public virtual ICollection<TblOrderDetail> TblOrderDetails { get; set; }

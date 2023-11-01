@@ -41,8 +41,9 @@
         <header class="header">
             <h2 class="logo">Bird store</h2>
             <nav class="navigation">
-                <a asp-page="HomePage">Trang chủ</a>
-                <a asp-page="User/Profile">Thông tin</a>
+                <a asp-page="/HomePage">Trang chủ</a>
+                <a asp-page="/User/Profile">Thông tin</a>
+                <a asp-page="/ShowAllBirds">Birds</a>
                 <a href="#">Dịch vụ</a>
                 <a href="#">Liên hệ</a>
             </nav>
@@ -91,6 +92,7 @@
                             </div>
                         </div>
                         <a asp-page="./UpdateProfile" asp-route-id="@HttpContext.Session.GetInt32("UserID")"><button><i class="fa fa-edit"></i>Edit profile</button></a>
+                        <a asp-page="./ViewOrderHistory" asp-route-id="@HttpContext.Session.GetInt32("UserID")"><button><i class="fa-solid fa-cart-shopping"></i>Order History</button></a>
                     </div>
                 </div>
             </div>
@@ -99,6 +101,7 @@
     </div>
     <!-- Optional JavaScript -->
     <script src="~/js/profile.js"></script>
+    <script src="https://kit.fontawesome.com/aadd71a7c7.js" crossorigin="anonymous"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

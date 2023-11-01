@@ -289,7 +289,7 @@ body {
     }
 
     .header.active {
-        background-color: var(--eerie-black-1);
+        background-color: hsl(228, 10%, 10%);
         box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.8);
     }
 
@@ -1045,7 +1045,7 @@ body.showCart .container {
     }
 
     .hero {
-        background-image: url("~/img/bgchim.jpg");
+        background-image: url("https://firebasestorage.googleapis.com/v0/b/birdfarmshop-firebase.appspot.com/o/bgchim.jpg?alt=media&token=eb763cc0-8fcb-491a-8021-f8617e6ad262");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: left;

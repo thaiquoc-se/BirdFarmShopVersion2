@@ -30,11 +30,11 @@
           rel="stylesheet">
 </head>
 <body>
-    <header class="header" data-header>
+    <header class="header active" data-header>
         <div class="container">
 
             <h1>
-                <a href="#" class="logo">Bird Store</a>
+                <a asp-page="HomePage" class="logo">Bird Store</a>
             </h1>
 
             <button class="nav-open-btn" aria-label="Open Menu" data-nav-open-btn>
@@ -52,7 +52,7 @@
                 <ul class="navbar-list">
 
                     <li>
-                        <a href="#home" class="navbar-link" data-nav-link>
+                        <a <a asp-page="HomePage" class="navbar-link" data-nav-link>
                             <span>Trang chủ</span>
 
                             <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
@@ -60,7 +60,7 @@
                     </li>
 
                     <li>
-                        <a href="#about" class="navbar-link" data-nav-link>
+                        <a <a asp-page="/User/Profile" class="navbar-link" data-nav-link>
                             <span>Thông tin</span>
 
                             <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
@@ -129,8 +129,8 @@
                         @foreach (var item in Model.Bird)
                         {
                             <div class="item">
-                                <img src="./img/Chim1a.png" alt="">
-                                <h2>@Html.DisplayFor(modelItem => item.BirdName)</h2>
+                                <img src="@Html.DisplayFor(modelItem => item.Image)" alt="">
+                                <h2><a asp-page="./BirdDetails" asp-route-id="@item.BirdId">@Html.DisplayFor(modelItem => item.BirdName)</a></h2>
                                 <div class="price">@Html.DisplayFor(modelItem => item.Price)</div>
 
                                 <div class="button1"><a asp-page="./Cart" asp-page-handler="addtocart" asp-route-id="@item.BirdId"><button class="addCart">Add to card</button></a></div>
