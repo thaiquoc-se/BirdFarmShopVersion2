@@ -7,21 +7,26 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
 using Services.IServices;
+using BusinessObjects.DTOs;
+using Services.Services;
 
 namespace BirdFarmShop.Pages.Admin.OrderManagement
 {
     public class IndexModel : PageModel
     {
         private readonly IOrderService _orderService;
-        private string isAdmin;
+        private readonly IUserService _userService;
+        public string isAdmin;
 
-        public IndexModel(IOrderService orderService)
+        public IndexModel(IOrderService orderService, IUserService userService)
         {
             _orderService = orderService;
+            _userService = userService;
         }
 
         public IList<TblOrder> TblOrder { get;set; } = default!;
-
+        public int UserId { get; private set; }
+        public UserDTO TblUserDTO { get; set; }
         public IActionResult OnGet()
         {
             try
@@ -41,6 +46,8 @@ namespace BirdFarmShop.Pages.Admin.OrderManagement
                 NotFound();
             }
             TblOrder = _orderService.GetAllOrders();
+            UserId = (int)HttpContext.Session.GetInt32("UserID")!;
+            TblUserDTO = _userService.GetUserDTOById(UserId);
             return Page();
         }
     }
