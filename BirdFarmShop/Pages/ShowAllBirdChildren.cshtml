@@ -1,0 +1,66 @@
+﻿@page
+@model BirdFarmShop.Pages.ShowAllBirdChildrenModel
+
+@{
+    ViewData["Title"] = "ShowAllBirdChildren";
+}
+
+<h1>ShowAllBirdChildren</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Tblchildrenbird[0].ChildrenBirdName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tblchildrenbird[0].ChildrenBirdOfType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tblchildrenbird[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tblchildrenbird[0].StatusChildrenBird)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tblchildrenbird[0].Bird)
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.Tblchildrenbird[0].Image)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Tblchildrenbird) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChildrenBirdName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChildrenBirdOfType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusChildrenBird)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bird.BirdName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ChildrenBirdId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ChildrenBirdId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ChildrenBirdId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

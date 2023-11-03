@@ -112,9 +112,17 @@
                                 <span>
                                     @Html.DisplayFor(model => model.Bird.BirdDescription)
                                 </span>
+                            </div>
+                            <div class="col-lg-12">
+                                <p class="tag-section"><strong>Gender : </strong><span>@Html.DisplayFor(model => model.Bird.Gender)</span></p>
+                            </div>
+                            <div class="col-lg-12">
+                                <p class="tag-section"><strong>Weight : </strong><span>@Html.DisplayFor(model => model.Bird.WeightofBirds)</span></p>
+                            </div>
+                            <div class="col-lg-12">
+                                <h6>Quantity : @Html.DisplayFor(model => model.Bird.Quantity) </h6>
                                 
                             </div>
-                            
                      
                             <div class="col-lg-12 mt-3">
                                 <div class="row">

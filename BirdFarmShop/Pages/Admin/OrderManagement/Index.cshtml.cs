@@ -45,7 +45,7 @@ namespace BirdFarmShop.Pages.Admin.OrderManagement
             {
                 NotFound();
             }
-            TblOrder = _orderService.GetAllOrders();
+            TblOrder = _orderService.GetAllOrders().OrderByDescending(p => p.OrderId).ToList();
             UserId = (int)HttpContext.Session.GetInt32("UserID")!;
             TblUserDTO = _userService.GetUserDTOById(UserId);
             return Page();
