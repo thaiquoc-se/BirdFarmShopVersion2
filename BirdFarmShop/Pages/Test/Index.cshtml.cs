@@ -18,15 +18,15 @@ namespace BirdFarmShop.Pages.Test
             _context = context;
         }
 
-        public IList<TblOrderDetail> TblOrderDetail { get;set; } = default!;
+        public IList<TblComment> TblComment { get;set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.TblOrderDetails != null)
+            if (_context.TblComments != null)
             {
-                TblOrderDetail = await _context.TblOrderDetails
+                TblComment = await _context.TblComments
                 .Include(t => t.Bird)
-                .Include(t => t.Order).ToListAsync();
+                .Include(t => t.User).ToListAsync();
             }
         }
     }

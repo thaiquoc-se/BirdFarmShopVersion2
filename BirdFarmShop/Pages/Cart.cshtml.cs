@@ -37,6 +37,7 @@ namespace BirdFarmShop.Pages
         public IActionResult OnGetAddToCart(int id)
         {
             cart = SessionHelper.GetObjectFromJson<List<Item>>(HttpContext.Session, "cart");
+
             if (cart == null)
             {
                 cart = new List<Item>();

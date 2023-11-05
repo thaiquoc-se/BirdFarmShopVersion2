@@ -5,54 +5,47 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Comment</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.TblOrderDetail[0].TotalPrice)
+                @Html.DisplayNameFor(model => model.TblComment[0].CommentDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblOrderDetail[0].Quantity)
+                @Html.DisplayNameFor(model => model.TblComment[0].Content)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblOrderDetail[0].CostsIncurred)
+                @Html.DisplayNameFor(model => model.TblComment[0].Rating)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblOrderDetail[0].Bird)
+                @Html.DisplayNameFor(model => model.TblComment[0].Bird)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TblOrderDetail[0].Order)
+                @Html.DisplayNameFor(model => model.TblComment[0].User)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.TblOrderDetail) {
+@foreach (var item in Model.TblComment) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.TotalPrice)
+                @Html.DisplayFor(modelItem => item.CommentDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
+                @Html.DisplayFor(modelItem => item.Content)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CostsIncurred)
+                @Html.DisplayFor(modelItem => item.Rating)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Bird.BirdName)
+                @Html.DisplayFor(modelItem => item.Bird.BirdDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Order.ShipAddress)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.DisplayFor(modelItem => item.User.Email)
             </td>
         </tr>
 }

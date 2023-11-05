@@ -6,28 +6,33 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Services.IServices;
 
 namespace BirdFarmShop.Pages
 {
     public class BirdDetailsModel : PageModel
     {
-        private readonly BusinessObjects.Models.BirdFarmShopContext _context;
+        private readonly IBirdService _birdService;
+        private readonly ICommentService _commentService;
 
-        public BirdDetailsModel(BusinessObjects.Models.BirdFarmShopContext context)
+        public BirdDetailsModel(IBirdService birdService, ICommentService commentService)
         {
-            _context = context;
+            _birdService = birdService;
+            _commentService = commentService;
         }
+        [BindProperty]
+        public Bird Bird { get; set; } = default!;
+        public IList<TblComment> TblComment { get; set; } = default!;
+        [BindProperty]
+        public TblComment Comment { get; set; } = default!;
+        public int UserID { get; private set; }
 
-      public Bird Bird { get; set; } = default!; 
-
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int? id)
         {
-            if (id == null || _context.Birds == null)
-            {
-                return NotFound();
-            }
 
-            var bird = await _context.Birds.FirstOrDefaultAsync(m => m.BirdId == id);
+            var bird = _birdService.GetBirdByID(id.Value);
+            var comment = _commentService.GetAllCommnets().Where(b => b.Bird.BirdId == id).ToList();
+            TblComment = comment;
             if (bird == null)
             {
                 return NotFound();
@@ -37,6 +42,28 @@ namespace BirdFarmShop.Pages
                 Bird = bird;
             }
             return Page();
+        }
+        public IActionResult OnPostAsync()
+        {
+            try
+            {
+                UserID = (int)HttpContext.Session.GetInt32("UserID")!;
+            }
+            catch
+            {
+                return RedirectToPage("/Login");
+            }
+            var comment = new TblComment()
+            {
+                UserId = UserID,
+                BirdId = Bird.BirdId,
+                CommentDate = DateTime.Now,
+                Content = Comment.Content,
+                Rating = Comment.Rating,
+            };
+            _commentService.AddNew(comment);
+
+            return RedirectToPage("ShowAllBirds");
         }
     }
 }

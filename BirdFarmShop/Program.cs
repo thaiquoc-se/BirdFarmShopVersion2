@@ -27,24 +27,7 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 builder.Services.AddAuthorization();
-//builder.Services.AddAuthentication(options =>
-//{
-//    options.DefaultScheme = "Cookies";
-//    options.DefaultChallengeScheme = "Google"; // Hoặc tên của nhà cung cấp xác thực khác
-//})
-//    .AddCookie("Cookies")
-//    .AddGoogle("Google", googleOptions =>
-//    {
-//        // Đọc thông tin Authentication:Google từ appsettings.json
-//        IConfigurationSection googleAuthNSection = builder.Configuration.GetSection("Authentication:Google");
 
-//        // Thiết lập ClientID và ClientSecret để truy cập API google
-//        googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
-//        googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
-//        // Cấu hình Url callback lại từ Google (không thiết lập thì mặc định là /signin-google)
-//        googleOptions.CallbackPath = "/LoginGoogleCallBack";
-
-//    });
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(10);
@@ -68,6 +51,8 @@ builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IBirdChildrenRepository, BirdChildrenRepository>();
 builder.Services.AddScoped<IBirdChildrenService, BirdChildrenService>();
+builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+builder.Services.AddScoped<ICommentService, CommentService>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddRazorPages().AddRazorPagesOptions(options => { options.Conventions.AddPageRoute("/HomePage", ""); });
 builder.Services.AddDbContext<BirdFarmShopContext>(options =>

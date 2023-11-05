@@ -7,28 +7,37 @@
 
 <h1>Edit</h1>
 
-<h4>TblOrderDetail</h4>
+<h4>TblComment</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="TblOrderDetail.OrderId" />
-            <input type="hidden" asp-for="TblOrderDetail.BirdId" />
+            <input type="hidden" asp-for="TblComment.CommentId" />
             <div class="form-group">
-                <label asp-for="TblOrderDetail.TotalPrice" class="control-label"></label>
-                <input asp-for="TblOrderDetail.TotalPrice" class="form-control" />
-                <span asp-validation-for="TblOrderDetail.TotalPrice" class="text-danger"></span>
+                <label asp-for="TblComment.BirdId" class="control-label"></label>
+                <select asp-for="TblComment.BirdId" class="form-control" asp-items="ViewBag.BirdId"></select>
+                <span asp-validation-for="TblComment.BirdId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TblOrderDetail.Quantity" class="control-label"></label>
-                <input asp-for="TblOrderDetail.Quantity" class="form-control" />
-                <span asp-validation-for="TblOrderDetail.Quantity" class="text-danger"></span>
+                <label asp-for="TblComment.UserId" class="control-label"></label>
+                <select asp-for="TblComment.UserId" class="form-control" asp-items="ViewBag.UserId"></select>
+                <span asp-validation-for="TblComment.UserId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TblOrderDetail.CostsIncurred" class="control-label"></label>
-                <input asp-for="TblOrderDetail.CostsIncurred" class="form-control" />
-                <span asp-validation-for="TblOrderDetail.CostsIncurred" class="text-danger"></span>
+                <label asp-for="TblComment.CommentDate" class="control-label"></label>
+                <input asp-for="TblComment.CommentDate" class="form-control" />
+                <span asp-validation-for="TblComment.CommentDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblComment.Content" class="control-label"></label>
+                <input asp-for="TblComment.Content" class="form-control" />
+                <span asp-validation-for="TblComment.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TblComment.Rating" class="control-label"></label>
+                <input asp-for="TblComment.Rating" class="form-control" />
+                <span asp-validation-for="TblComment.Rating" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />

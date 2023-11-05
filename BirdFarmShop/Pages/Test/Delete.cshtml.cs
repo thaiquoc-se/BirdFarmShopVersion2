@@ -19,40 +19,40 @@ namespace BirdFarmShop.Pages.Test
         }
 
         [BindProperty]
-      public TblOrderDetail TblOrderDetail { get; set; } = default!;
+      public TblComment TblComment { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblOrderDetails == null)
+            if (id == null || _context.TblComments == null)
             {
                 return NotFound();
             }
 
-            var tblorderdetail = await _context.TblOrderDetails.FirstOrDefaultAsync(m => m.OrderId == id);
+            var tblcomment = await _context.TblComments.FirstOrDefaultAsync(m => m.CommentId == id);
 
-            if (tblorderdetail == null)
+            if (tblcomment == null)
             {
                 return NotFound();
             }
             else 
             {
-                TblOrderDetail = tblorderdetail;
+                TblComment = tblcomment;
             }
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.TblOrderDetails == null)
+            if (id == null || _context.TblComments == null)
             {
                 return NotFound();
             }
-            var tblorderdetail = await _context.TblOrderDetails.FindAsync(id);
+            var tblcomment = await _context.TblComments.FindAsync(id);
 
-            if (tblorderdetail != null)
+            if (tblcomment != null)
             {
-                TblOrderDetail = tblorderdetail;
-                _context.TblOrderDetails.Remove(TblOrderDetail);
+                TblComment = tblcomment;
+                _context.TblComments.Remove(TblComment);
                 await _context.SaveChangesAsync();
             }
 

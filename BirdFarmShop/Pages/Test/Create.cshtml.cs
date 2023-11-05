@@ -20,24 +20,24 @@ namespace BirdFarmShop.Pages.Test
 
         public IActionResult OnGet()
         {
-        ViewData["BirdId"] = new SelectList(_context.Birds, "BirdId", "BirdName");
-        ViewData["OrderId"] = new SelectList(_context.TblOrders, "OrderId", "ShipAddress");
+        ViewData["BirdId"] = new SelectList(_context.Birds, "BirdId", "BirdDescription");
+        ViewData["UserId"] = new SelectList(_context.TblUsers, "UserId", "Email");
             return Page();
         }
 
         [BindProperty]
-        public TblOrderDetail TblOrderDetail { get; set; } = default!;
+        public TblComment TblComment { get; set; } = default!;
         
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-          if (!ModelState.IsValid || _context.TblOrderDetails == null || TblOrderDetail == null)
+          if (!ModelState.IsValid || _context.TblComments == null || TblComment == null)
             {
                 return Page();
             }
 
-            _context.TblOrderDetails.Add(TblOrderDetail);
+            _context.TblComments.Add(TblComment);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

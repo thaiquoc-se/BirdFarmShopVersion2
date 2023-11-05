@@ -6,29 +6,46 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using BusinessObjects.Models;
+using Services.IServices;
+using Services.UnitOfWork;
 
 namespace BirdFarmShop.Pages.Manager.BirdManagement
 {
     public class DeleteModel : PageModel
     {
-        private readonly BusinessObjects.Models.BirdFarmShopContext _context;
+        private readonly IBirdService _birdService;
+        private readonly IUnitOfWork _unitOfWork;
+        private string isManager;
 
-        public DeleteModel(BusinessObjects.Models.BirdFarmShopContext context)
+        public DeleteModel(IBirdService birdService, IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _birdService = birdService;
+            _unitOfWork = unitOfWork;
         }
 
         [BindProperty]
       public Bird Bird { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int? id)
         {
-            if (id == null || _context.Birds == null)
+            try
             {
-                return NotFound();
+                isManager = HttpContext.Session.GetString("isManager")!;
+                if (isManager != "MN")
+                {
+                    return NotFound();
+                }
+                if (isManager == null)
+                {
+                    return NotFound();
+                }
+            }
+            catch
+            {
+                NotFound();
             }
 
-            var bird = await _context.Birds.FirstOrDefaultAsync(m => m.BirdId == id);
+            var bird = _birdService.GetBirdByID(id.Value);
 
             if (bird == null)
             {
@@ -41,19 +58,35 @@ namespace BirdFarmShop.Pages.Manager.BirdManagement
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public IActionResult OnPost(int? id)
         {
-            if (id == null || _context.Birds == null)
+            try
             {
-                return NotFound();
+                isManager = HttpContext.Session.GetString("isManager")!;
+                if (isManager != "MN")
+                {
+                    return NotFound();
+                }
+                if (isManager == null)
+                {
+                    return NotFound();
+                }
             }
-            var bird = await _context.Birds.FindAsync(id);
+            catch
+            {
+                NotFound();
+            }
+            var bird =  _birdService.GetBirdByID(id.Value);
 
             if (bird != null)
             {
-                Bird = bird;
-                _context.Birds.Remove(Bird);
-                await _context.SaveChangesAsync();
+                bird.BirdStatus = false;
+                _unitOfWork.Update(bird);
+                _unitOfWork.SaveChanges();
+            }
+            else
+            {
+                return BadRequest();
             }
 
             return RedirectToPage("./Index");

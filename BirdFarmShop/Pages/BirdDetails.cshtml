@@ -138,8 +138,77 @@
                     </div>
                 </div>
             </div>
+            <div class="row hedding m-0 pl-3 pt-0 pb-3">
+                Comment
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TblComment[0].CommentDate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TblComment[0].Content)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TblComment[0].Rating)
+                        </th>
+                        
+                        <th>
+                            @Html.DisplayNameFor(model => model.TblComment[0].User)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.TblComment)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CommentDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Content)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Rating)
+                            </td>
+                            
+                            <td>
+                                @Html.DisplayFor(modelItem => item.User.FullName)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-md-4">
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <input asp-for="@Model.Bird.BirdId" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Comment.Content" class="control-label"></label>
+                            <input asp-for="Comment.Content" class="form-control" />
+                            <span asp-validation-for="Comment.Content" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Comment.Rating" class="control-label"></label>
+                            <input asp-for="Comment.Rating" class="form-control" />
+                            <span asp-validation-for="Comment.Rating" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Add Comment" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
+        </div>
+        
+    
+
     <script src="https://kit.fontawesome.com/aadd71a7c7.js" crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"

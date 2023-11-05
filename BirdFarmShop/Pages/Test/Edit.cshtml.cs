@@ -20,23 +20,23 @@ namespace BirdFarmShop.Pages.Test
         }
 
         [BindProperty]
-        public TblOrderDetail TblOrderDetail { get; set; } = default!;
+        public TblComment TblComment { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblOrderDetails == null)
+            if (id == null || _context.TblComments == null)
             {
                 return NotFound();
             }
 
-            var tblorderdetail =  await _context.TblOrderDetails.FirstOrDefaultAsync(m => m.OrderId == id);
-            if (tblorderdetail == null)
+            var tblcomment =  await _context.TblComments.FirstOrDefaultAsync(m => m.CommentId == id);
+            if (tblcomment == null)
             {
                 return NotFound();
             }
-            TblOrderDetail = tblorderdetail;
-           ViewData["BirdId"] = new SelectList(_context.Birds, "BirdId", "BirdName");
-           ViewData["OrderId"] = new SelectList(_context.TblOrders, "OrderId", "ShipAddress");
+            TblComment = tblcomment;
+           ViewData["BirdId"] = new SelectList(_context.Birds, "BirdId", "BirdDescription");
+           ViewData["UserId"] = new SelectList(_context.TblUsers, "UserId", "Email");
             return Page();
         }
 
@@ -49,7 +49,7 @@ namespace BirdFarmShop.Pages.Test
                 return Page();
             }
 
-            _context.Attach(TblOrderDetail).State = EntityState.Modified;
+            _context.Attach(TblComment).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace BirdFarmShop.Pages.Test
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!TblOrderDetailExists(TblOrderDetail.OrderId))
+                if (!TblCommentExists(TblComment.CommentId))
                 {
                     return NotFound();
                 }
@@ -70,9 +70,9 @@ namespace BirdFarmShop.Pages.Test
             return RedirectToPage("./Index");
         }
 
-        private bool TblOrderDetailExists(int id)
+        private bool TblCommentExists(int id)
         {
-          return (_context.TblOrderDetails?.Any(e => e.OrderId == id)).GetValueOrDefault();
+          return (_context.TblComments?.Any(e => e.CommentId == id)).GetValueOrDefault();
         }
     }
 }

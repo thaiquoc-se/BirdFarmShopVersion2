@@ -18,23 +18,23 @@ namespace BirdFarmShop.Pages.Test
             _context = context;
         }
 
-      public TblOrderDetail TblOrderDetail { get; set; } = default!; 
+      public TblComment TblComment { get; set; } = default!; 
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.TblOrderDetails == null)
+            if (id == null || _context.TblComments == null)
             {
                 return NotFound();
             }
 
-            var tblorderdetail = await _context.TblOrderDetails.FirstOrDefaultAsync(m => m.OrderId == id);
-            if (tblorderdetail == null)
+            var tblcomment = await _context.TblComments.FirstOrDefaultAsync(m => m.CommentId == id);
+            if (tblcomment == null)
             {
                 return NotFound();
             }
             else 
             {
-                TblOrderDetail = tblorderdetail;
+                TblComment = tblcomment;
             }
             return Page();
         }

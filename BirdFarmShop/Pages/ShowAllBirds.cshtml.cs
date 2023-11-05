@@ -23,7 +23,7 @@ namespace BirdFarmShop.Pages
 
         public void OnGet()
         {
-            Bird = _birdService.GetAllBirds();
+            Bird = _birdService.GetAllBirds().Where(b => b.BirdStatus != false).ToList();
         }
     }
 }
