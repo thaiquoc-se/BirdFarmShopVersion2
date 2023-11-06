@@ -11,5 +11,7 @@ namespace Services.IServices
     {
         List<TblComment> GetAllCommnets();
         void AddNew(TblComment comment);
+
+        void Delete(int id);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BusinessObjects.Models
 {
@@ -9,7 +10,12 @@ namespace BusinessObjects.Models
         public int BirdId { get; set; }
         public int UserId { get; set; }
         public DateTime? CommentDate { get; set; }
+
+        [Required]
         public string? Content { get; set; }
+
+        [Required]
+        [Range(1, 5, ErrorMessage = "Rating must be 1 to 5")]
         public int? Rating { get; set; }
 
         public virtual Bird Bird { get; set; } = null!;

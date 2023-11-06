@@ -53,6 +53,11 @@ namespace BirdFarmShop.Pages
             {
                 return RedirectToPage("/Login");
             }
+            if (string.IsNullOrEmpty(Comment.Content) || string.IsNullOrEmpty(Comment.Rating.ToString()) || Comment.Rating < 0 || Comment.Rating > 5)
+            {
+                OnGet(Bird.BirdId);
+                return Page();
+            }
             var comment = new TblComment()
             {
                 UserId = UserID,
@@ -63,7 +68,8 @@ namespace BirdFarmShop.Pages
             };
             _commentService.AddNew(comment);
 
-            return RedirectToPage("ShowAllBirds");
+            OnGet(Bird.BirdId);
+            return Page();
         }
     }
 }

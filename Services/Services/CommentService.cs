@@ -18,7 +18,10 @@ namespace Services.Services
         }
 
         public void AddNew(TblComment comment) => _commentRepository.AddNew(comment);
+
+        public void Delete(int id) => _commentRepository.Delete(id);
         
+
         public List<TblComment> GetAllCommnets() => _commentRepository.GetAllCommnets();
         
     }

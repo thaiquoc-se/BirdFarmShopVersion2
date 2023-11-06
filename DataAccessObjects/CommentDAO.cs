@@ -59,5 +59,21 @@ namespace DataAccessObjects
                 throw new Exception(ex.Message);
             }
         }
+
+        public void Delete(int id)
+        {
+            try
+            {
+                var comment = _context.TblComments.Where(c => c.CommentId == id).FirstOrDefault();
+                if (comment != null)
+                {
+                    _context.TblComments.Remove(comment);
+                    _context.SaveChanges();
+                }              
+            }catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

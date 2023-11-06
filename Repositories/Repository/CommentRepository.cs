@@ -12,6 +12,8 @@ namespace Repositories.Repository
     public class CommentRepository : ICommentRepository
     {
         public void AddNew(TblComment comment) => CommentDAO.Instance.AddNew(comment);
+
+        public void Delete(int id) => CommentDAO.Instance.Delete(id);
         
         public List<TblComment> GetAllCommnets() => CommentDAO.Instance.GetAllComments();
        

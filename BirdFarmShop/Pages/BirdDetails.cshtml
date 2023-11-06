@@ -186,11 +186,11 @@
                     <form method="post">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group">
-                            <input asp-for="@Model.Bird.BirdId" class="form-control" />
+                            <input asp-for="@Model.Bird.BirdId" type="hidden" class="form-control" />
                         </div>
                         <div class="form-group">
-                            <label asp-for="Comment.Content" class="control-label"></label>
-                            <input asp-for="Comment.Content" class="form-control" />
+                            <label>Your Comment</label>
+                            <textarea asp-for="Comment.Content" class="form-control" placeholder="Enter your comment"></textarea>
                             <span asp-validation-for="Comment.Content" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -206,9 +206,13 @@
             </div>
         </div>
         </div>
-        
-    
 
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
     <script src="https://kit.fontawesome.com/aadd71a7c7.js" crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -224,3 +228,4 @@
     <script src="https://code.highcharts.com/modules/series-label.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
 </body>
+

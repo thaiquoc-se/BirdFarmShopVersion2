@@ -1,0 +1,51 @@
+﻿@page
+@model BirdFarmShop.Pages.Admin.CommentManagement.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TblComment[0].CommentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblComment[0].Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TblComment[0].Rating)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.TblComment[0].User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.TblComment) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.User.FullName)
+            </td>
+            <td>
+                <a asp-page="./Delete" asp-route-id="@item.CommentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
